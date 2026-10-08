@@ -204,6 +204,60 @@ async function pngToJpg(){
 </footer>
 <script async="async" data-cfasync="false" src="https://pl31728278.profitableratecpmnetwork.com/6aa45e79b5967a7daf4a6125cb29f138/invoke.js"></script>
 <div id="container-6aa45e79b5967a7daf4a6125cb29f138"></div>
-</body>
+</body><!-- ToolNest Premium Payment -->
+<div class="card" style="margin-top:25px;">
+  <h2>💎 ToolNest Premium</h2>
+  <p>Choose your plan</p>
+
+  <div style="background:#f5f5f5;padding:15px;border-radius:10px;margin:10px 0;">
+    <h3>🆓 Free Trial</h3>
+    <p>1 hour free access</p>
+  </div>
+
+  <div style="background:#f5f5f5;padding:15px;border-radius:10px;margin:10px 0;">
+    <h3>💳 Monthly — $10</h3>
+    <p>Premium access for 30 days</p>
+    <button onclick="showPayment('Monthly')">Choose Monthly</button>
+  </div>
+
+  <div style="background:#f5f5f5;padding:15px;border-radius:10px;margin:10px 0;">
+    <h3>👑 Yearly — $99</h3>
+    <p>Premium access for 12 months</p>
+    <button onclick="showPayment('Yearly')">Choose Yearly</button>
+  </div>
+
+  <div id="paymentBox" style="display:none;margin-top:20px;text-align:left;">
+    <h3>💰 Payment</h3>
+
+    <p><b>USDT TRC-20</b></p>
+    <p>Wallet Address:</p>
+    <input type="text"
+      value="YOUR_USDT_TRC20_ADDRESS"
+      readonly
+      style="width:100%;padding:10px;box-sizing:border-box;">
+
+    <p><b>Meezan Bank</b></p>
+    <p>Account Name: YOUR_ACCOUNT_NAME</p>
+    <p>IBAN: YOUR_IBAN</p>
+
+    <p class="small">
+      After payment, keep your transaction/reference ID.
+      Premium access will be activated after payment verification.
+    </p>
+
+    <button onclick="alert('Payment verification will be added with the secure payment backend.')">
+      I Have Paid
+    </button>
+  </div>
+</div>
+
+<script>
+function showPayment(plan) {
+  document.getElementById("paymentBox").style.display = "block";
+  document.getElementById("paymentBox").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+</script>
 </html>
 </html>
