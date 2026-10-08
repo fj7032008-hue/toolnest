@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolNest - Free Online Tools</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .tool {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .tool h2 {
+      margin-bottom: 10px;
+    }
+
+    .tool p {
+      color: #666;
+      margin-bottom: 18px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🛠️ ToolNest</h1>
+    <p>Free Online Tools for Everyday Tasks</p>
+  </header>
+
+  <div class="container">
+
+    <div class="tools">
+
+      <div class="tool">
+        <h2>🖼️ Image Compressor</h2>
+        <p>Compress your images quickly.</p>
+        <button onclick="alert('Image Compressor coming soon!')">
+          Open Tool
+        </button>
+      </div>
+
+      <div class="tool">
+        <h2>📐 Image Resizer</h2>
+        <p>Resize images easily online.</p>
+        <button onclick="alert('Image Resizer coming soon!')">
+          Open Tool
+        </button>
+      </div>
+
+      <div class="tool">
+        <h2>🔄 JPG to PNG</h2>
+        <p>Convert images between formats.</p>
+        <button onclick="alert('JPG to PNG coming soon!')">
+          Open Tool
+        </button>
+      </div>
+
+      <div class="tool">
+        <h2>🔗 QR Generator</h2>
+        <p>Create QR codes easily.</p>
+        <button onclick="alert('QR Generator coming soon!')">
+          Open Tool
+        </button>
+      </div>
+
+      <div class="tool">
+        <h2>🔤 Word Counter</h2>
+        <p>Count words and characters.</p>
+        <button onclick="alert('Word Counter coming soon!')">
+          Open Tool
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 ToolNest — Free Online Tools
+  </footer>
+
+</body>
+          </html> 
