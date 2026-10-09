@@ -260,4 +260,56 @@ function showPayment(plan) {
 }
 </script>
 </html>
-</html>
+</<!-- Paste this block just BEFORE the final </body> tag in index.html.
+Make sure auth.js is loaded before this block and exposes window.toolnestAuth.
+-->
+<div class="card" id="authSection" style="margin:25px auto;max-width:450px;padding:20px;">
+  <h2>🔐 ToolNest Account</h2>
+  <input id="authEmail" type="email" placeholder="Email address" autocomplete="email" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+  <input id="authPassword" type="password" placeholder="Password (minimum 6 characters)" autocomplete="current-password" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+  <button type="button" onclick="toolnestRegister()">Sign Up</button>
+  <button type="button" onclick="toolnestLogin()">Login</button>
+  <button type="button" onclick="toolnestLogout()">Logout</button>
+  <p id="authMessage" role="status"></p>
+</div>
+<script>
+async function toolnestRegister() {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const message = document.getElementById("authMessage");
+  if (!email || password.length < 6) {
+    message.textContent = "Enter an email and password of at least 6 characters.";
+    return;
+  }
+  try {
+    const result = await window.toolnestAuth.signUp(email, password);
+    if (result.error) throw result.error;
+    message.textContent = result.data.session
+      ? "Account created successfully!"
+      : "Account created. Please check your email for confirmation.";
+  } catch (error) {
+    message.textContent = error.message || "Sign-up failed.";
+  }
+}
+async function toolnestLogin() {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const message = document.getElementById("authMessage");
+  try {
+    await window.toolnestAuth.logIn(email, password);
+    message.textContent = "Login successful!";
+  } catch (error) {
+    message.textContent = error.message || "Login failed.";
+  }
+}
+async function toolnestLogout() {
+  const message = document.getElementById("authMessage");
+  try {
+    await window.toolnestAuth.logOut();
+    message.textContent = "Logout successful!";
+  } catch (error) {
+    message.textContent = error.message || "Logout failed.";
+  }
+}
+</script>
+>
