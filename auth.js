@@ -5,7 +5,7 @@
 
 // 1. SUPABASE PROJECT URL
 const SUPABASE_URL =
-  "https://kcfbjixhkxpyntdmnqhx.supabase.co/rest/v1/;
+  "https://kcfbjixhkxpyntdmnqhx.supabase.co;
 
 // 2. SUPABASE PUBLISHABLE KEY
 // Replace the placeholder below with your real public/publishable key.
