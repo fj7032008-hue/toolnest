@@ -271,7 +271,7 @@ Make sure auth.js is loaded before this block and exposes window.toolnestAuth.
   <button type="button" onclick="toolnestLogin()">Login</button>
   <button type="button" onclick="toolnestLogout()">Logout</button>
   <p id="authMessage" role="status"></p>
-</div>
+</div><script src="auth.js"></script>
 <script>
 async function toolnestRegister() {
   const email = document.getElementById("authEmail").value.trim();
