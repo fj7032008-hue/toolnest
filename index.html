@@ -4,24 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ToolNest - Online Tools</title>
+  <title>ToolNest - Free Online Tools</title>
+  <meta name="description" content="Free online tools for text, QR codes, image compression, password generation and calculations.">
 
   <style>
     * {
       box-sizing: border-box;
     }
 
+    :root {
+      --primary: #2563eb;
+      --dark: #111827;
+      --muted: #64748b;
+      --background: #f4f7fb;
+      --border: #e5e7eb;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      background: var(--background);
       color: #172033;
     }
 
-    header {
-      background: #111827;
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      background: var(--primary);
       color: white;
-      padding: 18px 6%;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      filter: brightness(.93);
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      margin: 8px 0 14px;
+      background: white;
+      color: #172033;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    header {
+      background: var(--dark);
+      color: white;
+      padding: 16px 5%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -35,18 +81,10 @@
       color: #60a5fa;
     }
 
-    button {
-      background: #2563eb;
-      color: white;
-      border: 0;
-      border-radius: 8px;
-      padding: 12px 18px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1d4ed8;
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .secondary {
@@ -55,323 +93,1090 @@
 
     .hero {
       text-align: center;
-      padding: 65px 20px;
+      padding: 55px 20px;
       background: linear-gradient(135deg, #dbeafe, #f4f7fb);
     }
 
     .hero h1 {
       font-size: clamp(32px, 6vw, 48px);
+      margin-bottom: 12px;
     }
 
     .hero p {
-      color: #64748b;
+      color: var(--muted);
       line-height: 1.8;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 35px auto;
+      max-width: 1100px;
+      margin: 30px auto;
       padding: 20px;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 25px;
+      margin: 35px 0 24px;
     }
 
     .tools {
       display: grid;
       grid-template-columns: repeat(
         auto-fit,
-        minmax(210px, 1fr)
+        minmax(220px, 1fr)
       );
-      gap: 20px;
+      gap: 18px;
     }
 
     .tool-card {
       background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 4px 15px #0000000a;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 23px;
+      box-shadow: 0 4px 15px #00000008;
+    }
+
+    .tool-card h3 {
+      margin-top: 0;
     }
 
     .tool-card p {
-      color: #64748b;
+      color: var(--muted);
       line-height: 1.6;
+      min-height: 48px;
+    }
+
+    .tool-card button {
+      width: 100%;
+    }
+
+    .auth-card,
+    .account-card,
+    .tool-panel {
+      display: none;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 25px auto;
+      box-shadow: 0 4px 20px #0000000a;
     }
 
     .auth-card,
     .account-card {
-      display: none;
-      max-width: 420px;
-      margin: 30px auto;
-      padding: 25px;
-      border-radius: 12px;
-      background: white;
-      box-shadow: 0 4px 20px #00000012;
+      max-width: 440px;
     }
 
-    .auth-card input {
-      width: 100%;
-      padding: 13px;
-      margin: 8px 0 16px;
-      border: 1px solid #cbd5e1;
-      border-radius: 7px;
-      font-size: 16px;
+    .tool-panel {
+      max-width: 750px;
+      scroll-margin-top: 20px;
     }
 
+    .tool-panel h2 {
+      margin-top: 0;
+    }
+
+    .tool-panel label,
     .auth-card label {
       display: block;
+      font-weight: 600;
     }
 
-    .submit {
-      width: 100%;
+    .tool-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin: 8px 0 15px;
     }
 
-    #message {
+    .tool-actions button {
+      flex: 1;
+      min-width: 110px;
+    }
+
+    .result {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 9px;
+      padding: 14px;
+      margin-top: 12px;
+      overflow-wrap: anywhere;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .stat {
+      padding: 12px 5px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .status {
+      min-height: 22px;
       overflow-wrap: anywhere;
       line-height: 1.5;
     }
 
+    .qr-output {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .qr-output img,
+    .image-preview {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .image-preview {
+      display: block;
+      margin: 15px auto;
+      max-height: 350px;
+    }
+
+    .calc-display {
+      font-size: 30px;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    .calc-grid button {
+      min-height: 53px;
+      font-size: 18px;
+    }
+
+    .calc-grid .calc-clear {
+      background: #dc2626;
+    }
+
+    .calc-grid .calc-operator {
+      background: #475569;
+    }
+
+    .close-button {
+      background: #475569;
+      float: right;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #1d4ed8;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
     footer {
-      background: #111827;
+      background: var(--dark);
       color: white;
       text-align: center;
       padding: 25px;
-      margin-top: 50px;
+      margin-top: 45px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 500px) {
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+      .hero {
+        padding: 38px 16px;
+      }
+
+      .container {
+        padding: 14px;
+      }
+
+      .tool-panel,
+      .auth-card,
+      .account-card {
+        padding: 17px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">ToolNest</div>
+<header>
+  <div class="logo">ToolNest</div>
 
-    <nav>
-      <button class="secondary" id="loginNav">Login</button>
-      <button id="signupNav">Sign Up</button>
-    </nav>
-  </header>
+  <nav class="header-actions">
+    <button class="secondary" id="loginNav">Login</button>
+    <button id="signupNav">Sign Up</button>
+  </nav>
+</header>
 
-  <section class="hero">
-    <h1>Welcome to ToolNest</h1>
+<section class="hero">
+  <h1>Welcome to ToolNest 🚀</h1>
+  <p>
+    Free online tools for your everyday tasks.
+    Simple, useful and easy to use.
+  </p>
+  <button id="getStarted">Create Free Account</button>
+</section>
 
-    <p>
-      Your all-in-one place for useful online tools.
-      Simple, fast and easy to use.
-    </p>
+<main class="container">
 
-    <button id="getStarted">Get Started</button>
+  <!-- AUTHENTICATION -->
+
+  <section class="auth-card" id="authCard">
+    <h2 id="formTitle">Login to ToolNest</h2>
+
+    <form id="authForm">
+      <label for="email">Email Address</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="email"
+        placeholder="Enter your email"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        minlength="6"
+        autocomplete="current-password"
+        placeholder="Enter your password"
+        required
+      >
+
+      <button class="submit" id="submitButton" type="submit">
+        Login
+      </button>
+    </form>
+
+    <p id="message" class="status" role="status" aria-live="polite"></p>
   </section>
 
-  <main class="container">
+  <section class="account-card" id="accountCard">
+    <h2>My Account</h2>
+    <p id="userEmail"></p>
+    <button id="logoutButton">Logout</button>
+  </section>
 
-    <section class="auth-card" id="authCard">
-      <h2 id="formTitle">Login to ToolNest</h2>
+  <!-- TOOL DIRECTORY -->
 
-      <form id="authForm">
-        <label for="email">Email Address</label>
+  <h2 class="section-title">Explore Our 5 Free Tools</h2>
 
-        <input
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          autocomplete="email"
-          required
-        >
+  <section class="tools">
 
-        <label for="password">Password</label>
+    <article class="tool-card">
+      <h3>📝 Word Counter</h3>
+      <p>Count words, characters and sentences in your text.</p>
+      <button data-open-tool="words">Open Tool</button>
+    </article>
 
-        <input
-          id="password"
-          type="password"
-          placeholder="Enter your password"
-          minlength="6"
-          autocomplete="current-password"
-          required
-        >
+    <article class="tool-card">
+      <h3>🔳 QR Code Generator</h3>
+      <p>Create a QR code for a website link or any text.</p>
+      <button data-open-tool="qr">Open Tool</button>
+    </article>
 
-        <button class="submit" id="submitButton" type="submit">
-          Login
-        </button>
-      </form>
+    <article class="tool-card">
+      <h3>🖼️ Image Compressor</h3>
+      <p>Reduce image file size and download the compressed image.</p>
+      <button data-open-tool="image">Open Tool</button>
+    </article>
 
-      <p id="message" role="status" aria-live="polite"></p>
-    </section>
+    <article class="tool-card">
+      <h3>🔐 Password Generator</h3>
+      <p>Generate random passwords with your preferred length.</p>
+      <button data-open-tool="password">Open Tool</button>
+    </article>
 
-    <section class="account-card" id="accountCard">
-      <h2>My Account</h2>
-      <p id="userEmail"></p>
-      <button id="logoutButton">Logout</button>
-    </section>
+    <article class="tool-card">
+      <h3>🧮 Calculator</h3>
+      <p>Perform basic arithmetic calculations in your browser.</p>
+      <button data-open-tool="calculator">Open Tool</button>
+    </article>
 
-    <h2 class="section-title">Explore Our Tools</h2>
+  </section>
 
-    <section class="tools">
+  <!-- WORD COUNTER -->
 
-      <article class="tool-card">
-        <h3>📝 Text Tools</h3>
-        <p>Useful tools for everyday text tasks.</p>
-        <button class="toolButton">Explore</button>
-      </article>
+  <section class="tool-panel" id="tool-words">
+    <button class="close-button" data-close-tool>Close</button>
+    <h2>📝 Word Counter</h2>
+    <p class="muted">Enter or paste your text below.</p>
 
-      <article class="tool-card">
-        <h3>🔢 Calculator</h3>
-        <p>Tools for everyday calculations.</p>
-        <button class="toolButton">Explore</button>
-      </article>
+    <label for="wordText">Your text</label>
+    <textarea id="wordText" placeholder="Type or paste your text here..."></textarea>
 
-      <article class="tool-card">
-        <h3>⚡ Productivity</h3>
-        <p>Discover tools to make work easier.</p>
-        <button class="toolButton">Explore</button>
-      </article>
+    <div class="stats">
+      <div class="stat">
+        <strong id="wordCount">0</strong>
+        Words
+      </div>
+      <div class="stat">
+        <strong id="charCount">0</strong>
+        Characters
+      </div>
+      <div class="stat">
+        <strong id="sentenceCount">0</strong>
+        Sentences
+      </div>
+    </div>
 
-      <article class="tool-card">
-        <h3>🌐 Web Utilities</h3>
-        <p>Explore helpful online utilities.</p>
-        <button class="toolButton">Explore</button>
-      </article>
+    <div class="tool-actions">
+      <button id="clearWords" class="secondary">Clear Text</button>
+      <button id="copyWords">Copy Text</button>
+    </div>
+    <p id="wordStatus" class="status" role="status"></p>
+  </section>
 
-    </section>
-  </main>
+  <!-- QR GENERATOR -->
 
-  <footer>
-    <p>© 2026 ToolNest. All rights reserved.</p>
-  </footer>
+  <section class="tool-panel" id="tool-qr">
+    <button class="close-button" data-close-tool>Close</button>
+    <h2>🔳 QR Code Generator</h2>
+    <p class="muted">Enter a URL or text to create a QR code.</p>
 
-  <!-- Supabase library must load first -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <label for="qrText">Website URL or text</label>
+    <input id="qrText" type="text" placeholder="https://example.com">
 
-  <!-- Authentication file must load second -->
-  <script src="./auth.js"></script>
+    <button id="makeQR">Generate QR Code</button>
 
-  <script>
-    const authCard = document.getElementById("authCard");
-    const accountCard = document.getElementById("accountCard");
-    const message = document.getElementById("message");
-    const submitButton = document.getElementById("submitButton");
+    <p id="qrStatus" class="status" role="status"></p>
+    <div id="qrOutput" class="qr-output"></div>
+  </section>
 
-    let mode = "login";
+  <!-- IMAGE COMPRESSOR -->
 
-    function openAuth(newMode) {
-      mode = newMode;
+  <section class="tool-panel" id="tool-image">
+    <button class="close-button" data-close-tool>Close</button>
+    <h2>🖼️ Image Compressor</h2>
+    <p class="muted">
+      Select an image. Compression takes place in your browser.
+      Results depend on the image and chosen quality.
+    </p>
 
-      document.getElementById("formTitle").textContent =
-        mode === "signup"
-          ? "Create Your Account"
-          : "Login to ToolNest";
+    <label for="imageFile">Choose an image</label>
+    <input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp">
 
-      submitButton.textContent =
-        mode === "signup" ? "Create Account" : "Login";
+    <label for="imageQuality">Image quality</label>
+    <select id="imageQuality">
+      <option value="0.9">High quality</option>
+      <option value="0.75" selected>Balanced</option>
+      <option value="0.5">Smaller file</option>
+      <option value="0.3">Lowest size</option>
+    </select>
 
-      document.getElementById("password").autocomplete =
-        mode === "signup" ? "new-password" : "current-password";
+    <button id="compressImage">Compress Image</button>
 
-      message.textContent = "";
-      authCard.style.display = "block";
-      authCard.scrollIntoView({ behavior: "smooth" });
+    <p id="imageStatus" class="status" role="status"></p>
+    <div id="imageOutput"></div>
+  </section>
+
+  <!-- PASSWORD GENERATOR -->
+
+  <section class="tool-panel" id="tool-password">
+    <button class="close-button" data-close-tool>Close</button>
+    <h2>🔐 Password Generator</h2>
+    <p class="muted">
+      Generate a random password. Save it securely if you need it later.
+    </p>
+
+    <label for="passwordLength">Password length</label>
+    <input id="passwordLength" type="number" min="8" max="64" value="16">
+
+    <label>
+      <input id="includeUpper" type="checkbox" checked style="width:auto;margin:0 7px 0 0">
+      Include uppercase letters
+    </label>
+
+    <label>
+      <input id="includeLower" type="checkbox" checked style="width:auto;margin:0 7px 0 0">
+      Include lowercase letters
+    </label>
+
+    <label>
+      <input id="includeNumbers" type="checkbox" checked style="width:auto;margin:0 7px 0 0">
+      Include numbers
+    </label>
+
+    <label>
+      <input id="includeSymbols" type="checkbox" checked style="width:auto;margin:0 7px 0 0">
+      Include symbols
+    </label>
+
+    <button id="generatePassword">Generate Password</button>
+
+    <label for="generatedPassword" style="margin-top:18px">
+      Generated password
+    </label>
+    <input id="generatedPassword" type="text" readonly placeholder="Your password will appear here">
+
+    <button id="copyPassword" class="secondary">Copy Password</button>
+    <p id="passwordStatus" class="status" role="status"></p>
+  </section>
+
+  <!-- CALCULATOR -->
+
+  <section class="tool-panel" id="tool-calculator">
+    <button class="close-button" data-close-tool>Close</button>
+    <h2>🧮 Calculator</h2>
+
+    <label for="calcDisplay">Calculation</label>
+    <input
+      id="calcDisplay"
+      class="calc-display"
+      type="text"
+      value="0"
+      readonly
+      aria-label="Calculator display"
+    >
+
+    <div class="calc-grid">
+      <button class="calc-clear" data-calc="clear">C</button>
+      <button class="calc-operator" data-calc="back">⌫</button>
+      <button class="calc-operator" data-value="(">(</button>
+      <button class="calc-operator" data-value=")">)</button>
+
+      <button data-value="7">7</button>
+      <button data-value="8">8</button>
+      <button data-value="9">9</button>
+      <button class="calc-operator" data-value="/">÷</button>
+
+      <button data-value="4">4</button>
+      <button data-value="5">5</button>
+      <button data-value="6">6</button>
+      <button class="calc-operator" data-value="*">×</button>
+
+      <button data-value="1">1</button>
+      <button data-value="2">2</button>
+      <button data-value="3">3</button>
+      <button class="calc-operator" data-value="-">−</button>
+
+      <button data-value="0">0</button>
+      <button data-value=".">.</button>
+      <button class="calc-operator" data-calc="equals">=</button>
+      <button class="calc-operator" data-value="+">+</button>
+    </div>
+
+    <p id="calcStatus" class="status" role="status" aria-live="polite"></p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 ToolNest. All rights reserved.</p>
+  <p>Free tools for everyday tasks.</p>
+</footer>
+
+<!-- Load libraries before your own JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="./auth.js"></script>
+
+<script>
+"use strict";
+
+// ======================================
+// AUTHENTICATION
+// ======================================
+
+const authCard = document.getElementById("authCard");
+const accountCard = document.getElementById("accountCard");
+const message = document.getElementById("message");
+const submitButton = document.getElementById("submitButton");
+
+let authMode = "login";
+
+function openAuth(mode) {
+  authMode = mode;
+
+  document.getElementById("formTitle").textContent =
+    mode === "signup" ? "Create Your Account" : "Login to ToolNest";
+
+  submitButton.textContent =
+    mode === "signup" ? "Create Account" : "Login";
+
+  document.getElementById("password").autocomplete =
+    mode === "signup" ? "new-password" : "current-password";
+
+  message.textContent = "";
+  authCard.style.display = "block";
+  authCard.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.getElementById("loginNav").onclick = () => openAuth("login");
+document.getElementById("signupNav").onclick = () => openAuth("signup");
+document.getElementById("getStarted").onclick = () => openAuth("signup");
+
+async function updateAccount() {
+  try {
+    if (!window.toolnestAuth) return;
+
+    const user = await window.toolnestAuth.getCurrentUser();
+
+    if (user) {
+      document.getElementById("userEmail").textContent =
+        "Logged in as: " + user.email;
+
+      accountCard.style.display = "block";
+      authCard.style.display = "none";
+    } else {
+      accountCard.style.display = "none";
+    }
+  } catch (error) {
+    accountCard.style.display = "none";
+  }
+}
+
+document.getElementById("authForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!window.toolnestAuth) {
+    message.textContent = "Authentication failed to load. Check auth.js.";
+    return;
+  }
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  submitButton.disabled = true;
+  message.textContent = "Please wait...";
+
+  try {
+    if (authMode === "signup") {
+      const result = await window.toolnestAuth.signUp(email, password);
+
+      message.textContent = result.session
+        ? "Account created successfully!"
+        : "Account created. Check your email for confirmation.";
+    } else {
+      await window.toolnestAuth.logIn(email, password);
+      message.textContent = "Login successful!";
     }
 
-    document.getElementById("loginNav").onclick =
-      () => openAuth("login");
+    await updateAccount();
+  } catch (error) {
+    message.textContent = error.message || "Something went wrong.";
+  } finally {
+    submitButton.disabled = false;
+  }
+});
 
-    document.getElementById("signupNav").onclick =
-      () => openAuth("signup");
+document.getElementById("logoutButton").onclick = async () => {
+  try {
+    await window.toolnestAuth.logOut();
+    accountCard.style.display = "none";
+    openAuth("login");
+    message.textContent = "Logged out successfully.";
+  } catch (error) {
+    message.textContent = error.message || "Logout failed.";
+  }
+};
 
-    document.getElementById("getStarted").onclick =
-      () => openAuth("signup");
+window.addEventListener("toolnest-auth-change", updateAccount);
+updateAccount();
 
-    document.querySelectorAll(".toolButton").forEach(button => {
-      button.onclick = () => {
-        alert("This tool is coming soon!");
-      };
+// ======================================
+// OPEN AND CLOSE TOOLS
+// ======================================
+
+const allPanels = document.querySelectorAll(".tool-panel");
+
+function closeAllTools() {
+  allPanels.forEach(panel => {
+    panel.style.display = "none";
+  });
+}
+
+document.querySelectorAll("[data-open-tool]").forEach(button => {
+  button.addEventListener("click", () => {
+    closeAllTools();
+
+    const name = button.dataset.openTool;
+    const panel = document.getElementById("tool-" + name);
+
+    if (panel) {
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+
+document.querySelectorAll("[data-close-tool]").forEach(button => {
+  button.addEventListener("click", () => {
+    button.closest(".tool-panel").style.display = "none";
+    document.querySelector(".section-title").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+});
+
+// ======================================
+// WORD COUNTER
+// ======================================
+
+const wordText = document.getElementById("wordText");
+
+function updateWordCount() {
+  const text = wordText.value;
+  const trimmed = text.trim();
+
+  const words = trimmed
+    ? trimmed.split(/\s+/u).length
+    : 0;
+
+  const sentences = trimmed
+    ? (trimmed.match(/[^.!?]+[.!?]+|[^.!?]+$/gu) || [])
+        .filter(sentence => sentence.trim()).length
+    : 0;
+
+  document.getElementById("wordCount").textContent = words;
+  document.getElementById("charCount").textContent = text.length;
+  document.getElementById("sentenceCount").textContent = sentences;
+}
+
+wordText.addEventListener("input", updateWordCount);
+
+document.getElementById("clearWords").onclick = () => {
+  wordText.value = "";
+  updateWordCount();
+  document.getElementById("wordStatus").textContent = "Text cleared.";
+};
+
+document.getElementById("copyWords").onclick = async () => {
+  try {
+    await copyText(wordText.value);
+    document.getElementById("wordStatus").textContent = "Text copied.";
+  } catch (error) {
+    document.getElementById("wordStatus").textContent =
+      "Copy failed. Please select and copy the text manually.";
+  }
+};
+
+// ======================================
+// COPY HELPER
+// ======================================
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  const success = document.execCommand("copy");
+  textarea.remove();
+
+  if (!success) {
+    throw new Error("Copy failed");
+  }
+}
+
+// ======================================
+// QR CODE GENERATOR
+// ======================================
+
+document.getElementById("makeQR").onclick = () => {
+  const value = document.getElementById("qrText").value.trim();
+  const output = document.getElementById("qrOutput");
+  const status = document.getElementById("qrStatus");
+
+  output.replaceChildren();
+  status.textContent = "";
+
+  if (!value) {
+    status.textContent = "Please enter a URL or text.";
+    return;
+  }
+
+  if (typeof QRCode === "undefined") {
+    status.textContent =
+      "QR library could not load. Check your internet connection and try again.";
+    return;
+  }
+
+  try {
+    new QRCode(output, {
+      text: value,
+      width: 220,
+      height: 220,
+      colorDark: "#111827",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
     });
 
-    document.getElementById("authForm").addEventListener(
-      "submit",
-      async event => {
-        event.preventDefault();
+    const download = document.createElement("button");
+    download.textContent = "Download QR Code";
+    download.style.marginTop = "14px";
 
-        if (!window.toolnestAuth) {
-          message.textContent =
-            "Authentication failed to load. Check auth.js.";
+    download.onclick = () => {
+      const canvas = output.querySelector("canvas");
+      const image = output.querySelector("img");
+
+      let dataURL = "";
+
+      if (canvas) {
+        dataURL = canvas.toDataURL("image/png");
+      } else if (image && image.src.startsWith("data:")) {
+        dataURL = image.src;
+      }
+
+      if (!dataURL) {
+        status.textContent = "QR image is not ready yet.";
+        return;
+      }
+
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "toolnest-qr.png";
+      link.click();
+    };
+
+    output.appendChild(download);
+    status.textContent = "QR code generated successfully.";
+  } catch (error) {
+    status.textContent = "Could not generate the QR code.";
+  }
+};
+
+// ======================================
+// IMAGE COMPRESSOR
+// ======================================
+
+let selectedImageURL = null;
+
+document.getElementById("imageFile").addEventListener("change", event => {
+  const file = event.target.files[0];
+  const status = document.getElementById("imageStatus");
+  const output = document.getElementById("imageOutput");
+
+  output.replaceChildren();
+
+  if (selectedImageURL) {
+    URL.revokeObjectURL(selectedImageURL);
+    selectedImageURL = null;
+  }
+
+  if (!file) {
+    status.textContent = "";
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    status.textContent = "Please choose a valid image.";
+    event.target.value = "";
+    return;
+  }
+
+  if (file.size > 20 * 1024 * 1024) {
+    status.textContent = "Please choose an image smaller than 20 MB.";
+    event.target.value = "";
+    return;
+  }
+
+  selectedImageURL = URL.createObjectURL(file);
+  status.textContent =
+    "Selected: " + file.name + " (" + formatBytes(file.size) + ")";
+});
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+}
+
+document.getElementById("compressImage").onclick = () => {
+  const file = document.getElementById("imageFile").files[0];
+  const status = document.getElementById("imageStatus");
+  const output = document.getElementById("imageOutput");
+  const quality = Number(document.getElementById("imageQuality").value);
+
+  if (!file || !selectedImageURL) {
+    status.textContent = "Please select an image first.";
+    return;
+  }
+
+  status.textContent = "Compressing image...";
+  output.replaceChildren();
+
+  const image = new Image();
+
+  image.onload = () => {
+    try {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      const maxDimension = 2400;
+      const scale = Math.min(
+        1,
+        maxDimension / Math.max(image.naturalWidth, image.naturalHeight)
+      );
+
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      const mimeType = "image/jpeg";
+
+      canvas.toBlob(blob => {
+        if (!blob) {
+          status.textContent = "Compression failed. Try another image.";
           return;
         }
 
-        const email =
-          document.getElementById("email").value.trim();
+        const resultURL = URL.createObjectURL(blob);
+        const preview = document.createElement("img");
 
-        const password =
-          document.getElementById("password").value;
+        preview.src = resultURL;
+        preview.alt = "Compressed image preview";
+        preview.className = "image-preview";
 
-        submitButton.disabled = true;
-        message.textContent = "Please wait...";
+        const details = document.createElement("p");
+        details.className = "result";
 
-        try {
-          if (mode === "signup") {
-            const result =
-              await window.toolnestAuth.signUp(email, password);
+        const difference = file.size
+          ? ((file.size - blob.size) / file.size * 100).toFixed(1)
+          : "0";
 
-            if (result.session) {
-              message.textContent = "Account created successfully!";
-            } else {
-              message.textContent =
-                "Account created. Check your email for confirmation.";
-            }
-          } else {
-            await window.toolnestAuth.logIn(email, password);
-            message.textContent = "Login successful!";
-          }
+        details.textContent =
+          "Original: " + formatBytes(file.size) +
+          " | Compressed: " + formatBytes(blob.size) +
+          " | Size change: " + difference + "%";
 
-          await updateAccount();
-        } catch (error) {
-          message.textContent =
-            error.message || "Something went wrong.";
-        } finally {
-          submitButton.disabled = false;
-        }
-      }
+        const download = document.createElement("a");
+        download.href = resultURL;
+        download.download = "toolnest-compressed.jpg";
+        download.textContent = "Download Compressed Image";
+        download.style.display = "inline-block";
+        download.style.margin = "12px 0";
+        download.style.color = "#1d4ed8";
+
+        output.append(preview, details, download);
+        status.textContent = "Image processing complete.";
+      }, mimeType, quality);
+    } catch (error) {
+      status.textContent = "Could not compress this image.";
+    }
+  };
+
+  image.onerror = () => {
+    status.textContent = "Could not open this image. Try another file.";
+  };
+
+  image.src = selectedImageURL;
+};
+
+// ======================================
+// PASSWORD GENERATOR
+// ======================================
+
+document.getElementById("generatePassword").onclick = () => {
+  const status = document.getElementById("passwordStatus");
+
+  const length = Number(
+    document.getElementById("passwordLength").value
+  );
+
+  if (!Number.isInteger(length) || length < 8 || length > 64) {
+    status.textContent = "Choose a length between 8 and 64.";
+    return;
+  }
+
+  const groups = [];
+
+  if (document.getElementById("includeUpper").checked) {
+    groups.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+  }
+
+  if (document.getElementById("includeLower").checked) {
+    groups.push("abcdefghijklmnopqrstuvwxyz");
+  }
+
+  if (document.getElementById("includeNumbers").checked) {
+    groups.push("0123456789");
+  }
+
+  if (document.getElementById("includeSymbols").checked) {
+    groups.push("!@#$%^&*()-_=+[]{}?");
+  }
+
+  if (!groups.length) {
+    status.textContent = "Select at least one character type.";
+    return;
+  }
+
+  if (!window.crypto || !window.crypto.getRandomValues) {
+    status.textContent = "Secure random generation is not supported.";
+    return;
+  }
+
+  const randomIndex = max => {
+    const array = new Uint32Array(1);
+    const limit = Math.floor(4294967296 / max) * max;
+
+    do {
+      crypto.getRandomValues(array);
+    } while (array[0] >= limit);
+
+    return array[0] % max;
+  };
+
+  const allCharacters = groups.join("");
+  const passwordCharacters = [];
+
+  // Ensure at least one character from each selected group.
+  groups.forEach(group => {
+    passwordCharacters.push(group[randomIndex(group.length)]);
+  });
+
+  while (passwordCharacters.length < length) {
+    passwordCharacters.push(
+      allCharacters[randomIndex(allCharacters.length)]
     );
+  }
 
-    async function updateAccount() {
-      try {
-        const user =
-          await window.toolnestAuth.getCurrentUser();
+  // Shuffle the characters.
+  for (let i = passwordCharacters.length - 1; i > 0; i--) {
+    const j = randomIndex(i + 1);
+    [passwordCharacters[i], passwordCharacters[j]] =
+      [passwordCharacters[j], passwordCharacters[i]];
+  }
 
-        if (user) {
-          document.getElementById("userEmail").textContent =
-            "Logged in as: " + user.email;
+  document.getElementById("generatedPassword").value =
+    passwordCharacters.join("");
 
-          accountCard.style.display = "block";
-          authCard.style.display = "none";
-        } else {
-          accountCard.style.display = "none";
-        }
-      } catch (error) {
-        accountCard.style.display = "none";
-      }
+  status.textContent = "Password generated. Keep it private.";
+};
+
+document.getElementById("copyPassword").onclick = async () => {
+  const password = document.getElementById("generatedPassword").value;
+  const status = document.getElementById("passwordStatus");
+
+  if (!password) {
+    status.textContent = "Generate a password first.";
+    return;
+  }
+
+  try {
+    await copyText(password);
+    status.textContent = "Password copied.";
+  } catch (error) {
+    status.textContent = "Copy failed. Select the password and copy it manually.";
+  }
+};
+
+// ======================================
+// CALCULATOR
+// ======================================
+
+const calcDisplay = document.getElementById("calcDisplay");
+const calcStatus = document.getElementById("calcStatus");
+
+document.querySelectorAll("[data-value], [data-calc]").forEach(button => {
+  button.addEventListener("click", () => {
+    const action = button.dataset.calc;
+    const value = button.dataset.value;
+
+    if (action === "clear") {
+      calcDisplay.value = "0";
+      calcStatus.textContent = "";
+      return;
     }
 
-    document.getElementById("logoutButton").onclick =
-      async () => {
-        try {
-          await window.toolnestAuth.logOut();
-          accountCard.style.display = "none";
-          openAuth("login");
-          message.textContent = "Logged out successfully.";
-        } catch (error) {
-          message.textContent =
-            error.message || "Logout failed.";
+    if (action === "back") {
+      calcDisplay.value =
+        calcDisplay.value.length > 1
+          ? calcDisplay.value.slice(0, -1)
+          : "0";
+      return;
+    }
+
+    if (action === "equals") {
+      try {
+        const expression = calcDisplay.value;
+
+        if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
+          throw new Error("Invalid expression");
         }
-      };
 
-    window.addEventListener("toolnest-auth-change", updateAccount);
+        const result = Function(
+          '"use strict"; return (' + expression + ')'
+        )();
 
-    updateAccount();
-  </script>
+        if (!Number.isFinite(result)) {
+          throw new Error("Invalid result");
+        }
+
+        calcDisplay.value = String(
+          Number(result.toPrecision(12))
+        );
+
+        calcStatus.textContent = "";
+      } catch (error) {
+        calcStatus.textContent = "Invalid calculation.";
+      }
+
+      return;
+    }
+
+    if (value !== undefined) {
+      if (calcDisplay.value === "0" && /[0-9.(]/.test(value)) {
+        calcDisplay.value = value;
+      } else {
+        calcDisplay.value += value;
+      }
+
+      calcStatus.textContent = "";
+    }
+  });
+});
+
+console.log("ToolNest: All five tools initialized.");
+</script>
 
 </body>
 </html>
