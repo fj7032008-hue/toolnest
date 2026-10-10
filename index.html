@@ -264,7 +264,7 @@ function showPayment(plan) {
 Make sure auth.js is loaded before this block and exposes window.toolnestAuth.
 -->
 <div class="card" id="authSection" style="margin:25px auto;max-width:450px;padding:20px;">
-  <h2>🔐 ToolNest Account</h2>
+  <h2>🔐 ToolNest Account</h2><script src="auth.js"></script>
   <input id="authEmail" type="email" placeholder="Email address" autocomplete="email" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
   <input id="authPassword" type="password" placeholder="Password (minimum 6 characters)" autocomplete="current-password" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
   <button type="button" onclick="toolnestRegister()">Sign Up</button>
