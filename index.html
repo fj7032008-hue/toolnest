@@ -50,4 +50,328 @@
     }
 
     .secondary {
-     
+      background: #374151;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 65px 20px;
+      background: linear-gradient(135deg, #dbeafe, #f4f7fb);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 48px);
+    }
+
+    .hero p {
+      color: #64748b;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(210px, 1fr)
+      );
+      gap: 20px;
+    }
+
+    .tool-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 15px #0000000a;
+    }
+
+    .tool-card p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .auth-card,
+    .account-card {
+      display: none;
+      max-width: 420px;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 4px 20px #00000012;
+    }
+
+    .auth-card input {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    .auth-card label {
+      display: block;
+    }
+
+    .submit {
+      width: 100%;
+    }
+
+    #message {
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+    }
+
+    footer {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">ToolNest</div>
+
+    <nav>
+      <button class="secondary" id="loginNav">Login</button>
+      <button id="signupNav">Sign Up</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to ToolNest</h1>
+
+    <p>
+      Your all-in-one place for useful online tools.
+      Simple, fast and easy to use.
+    </p>
+
+    <button id="getStarted">Get Started</button>
+  </section>
+
+  <main class="container">
+
+    <section class="auth-card" id="authCard">
+      <h2 id="formTitle">Login to ToolNest</h2>
+
+      <form id="authForm">
+        <label for="email">Email Address</label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+
+        <label for="password">Password</label>
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter your password"
+          minlength="6"
+          autocomplete="current-password"
+          required
+        >
+
+        <button class="submit" id="submitButton" type="submit">
+          Login
+        </button>
+      </form>
+
+      <p id="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="account-card" id="accountCard">
+      <h2>My Account</h2>
+      <p id="userEmail"></p>
+      <button id="logoutButton">Logout</button>
+    </section>
+
+    <h2 class="section-title">Explore Our Tools</h2>
+
+    <section class="tools">
+
+      <article class="tool-card">
+        <h3>📝 Text Tools</h3>
+        <p>Useful tools for everyday text tasks.</p>
+        <button class="toolButton">Explore</button>
+      </article>
+
+      <article class="tool-card">
+        <h3>🔢 Calculator</h3>
+        <p>Tools for everyday calculations.</p>
+        <button class="toolButton">Explore</button>
+      </article>
+
+      <article class="tool-card">
+        <h3>⚡ Productivity</h3>
+        <p>Discover tools to make work easier.</p>
+        <button class="toolButton">Explore</button>
+      </article>
+
+      <article class="tool-card">
+        <h3>🌐 Web Utilities</h3>
+        <p>Explore helpful online utilities.</p>
+        <button class="toolButton">Explore</button>
+      </article>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 ToolNest. All rights reserved.</p>
+  </footer>
+
+  <!-- Supabase library must load first -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Authentication file must load second -->
+  <script src="./auth.js"></script>
+
+  <script>
+    const authCard = document.getElementById("authCard");
+    const accountCard = document.getElementById("accountCard");
+    const message = document.getElementById("message");
+    const submitButton = document.getElementById("submitButton");
+
+    let mode = "login";
+
+    function openAuth(newMode) {
+      mode = newMode;
+
+      document.getElementById("formTitle").textContent =
+        mode === "signup"
+          ? "Create Your Account"
+          : "Login to ToolNest";
+
+      submitButton.textContent =
+        mode === "signup" ? "Create Account" : "Login";
+
+      document.getElementById("password").autocomplete =
+        mode === "signup" ? "new-password" : "current-password";
+
+      message.textContent = "";
+      authCard.style.display = "block";
+      authCard.scrollIntoView({ behavior: "smooth" });
+    }
+
+    document.getElementById("loginNav").onclick =
+      () => openAuth("login");
+
+    document.getElementById("signupNav").onclick =
+      () => openAuth("signup");
+
+    document.getElementById("getStarted").onclick =
+      () => openAuth("signup");
+
+    document.querySelectorAll(".toolButton").forEach(button => {
+      button.onclick = () => {
+        alert("This tool is coming soon!");
+      };
+    });
+
+    document.getElementById("authForm").addEventListener(
+      "submit",
+      async event => {
+        event.preventDefault();
+
+        if (!window.toolnestAuth) {
+          message.textContent =
+            "Authentication failed to load. Check auth.js.";
+          return;
+        }
+
+        const email =
+          document.getElementById("email").value.trim();
+
+        const password =
+          document.getElementById("password").value;
+
+        submitButton.disabled = true;
+        message.textContent = "Please wait...";
+
+        try {
+          if (mode === "signup") {
+            const result =
+              await window.toolnestAuth.signUp(email, password);
+
+            if (result.session) {
+              message.textContent = "Account created successfully!";
+            } else {
+              message.textContent =
+                "Account created. Check your email for confirmation.";
+            }
+          } else {
+            await window.toolnestAuth.logIn(email, password);
+            message.textContent = "Login successful!";
+          }
+
+          await updateAccount();
+        } catch (error) {
+          message.textContent =
+            error.message || "Something went wrong.";
+        } finally {
+          submitButton.disabled = false;
+        }
+      }
+    );
+
+    async function updateAccount() {
+      try {
+        const user =
+          await window.toolnestAuth.getCurrentUser();
+
+        if (user) {
+          document.getElementById("userEmail").textContent =
+            "Logged in as: " + user.email;
+
+          accountCard.style.display = "block";
+          authCard.style.display = "none";
+        } else {
+          accountCard.style.display = "none";
+        }
+      } catch (error) {
+        accountCard.style.display = "none";
+      }
+    }
+
+    document.getElementById("logoutButton").onclick =
+      async () => {
+        try {
+          await window.toolnestAuth.logOut();
+          accountCard.style.display = "none";
+          openAuth("login");
+          message.textContent = "Logged out successfully.";
+        } catch (error) {
+          message.textContent =
+            error.message || "Logout failed.";
+        }
+      };
+
+    window.addEventListener("toolnest-auth-change", updateAccount);
+
+    updateAccount();
+  </script>
+
+</body>
+</html>
