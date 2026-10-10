@@ -8,6 +8,24 @@
 *{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top left,#1b2a50 0,var(--bg) 42rem)}
 header{padding:18px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:#0b1020ed;z-index:5}.head,main,footer{max-width:1100px;margin:auto}.head{display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{font-size:1.4rem;font-weight:850}.brand span{color:var(--accent)}main{padding:24px 16px 42px}.hero{padding:18px 0}.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.1;margin:.2em 0}.muted{color:var(--muted)}.small{font-size:.88rem}.grid,.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--border);border-radius:16px;padding:18px;margin:16px 0;min-width:0;overflow-wrap:anywhere}.card h2,.card h3{margin-top:0}label{display:block;font-weight:650;margin:12px 0 6px}input,textarea,select{width:100%;padding:11px 12px;background:#0c1427;color:var(--text);border:1px solid var(--border);border-radius:10px;font:inherit}textarea{min-height:110px;resize:vertical}button,.buttonlink{border:0;border-radius:10px;padding:11px 15px;background:linear-gradient(120deg,#7c9cff,#9b8cff);color:#091126;font:inherit;font-weight:750;cursor:pointer;display:inline-block;text-decoration:none;margin-top:10px}button:disabled{opacity:.55;cursor:wait}.secondary{background:#293653;color:var(--text);border:1px solid #3a4b70}.danger{background:#572b3b;color:#ffe8ec;border:1px solid #804254}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.status{min-height:1.4em;overflow-wrap:anywhere}.success{color:var(--good)}.error{color:var(--bad)}.warning{color:#ffd27a}.plan,.result{background:#0c1427a8;border:1px solid var(--border);border-radius:12px;padding:14px;margin:12px 0}.price{font-size:2rem;font-weight:850}.sectiontitle{margin-top:34px}.check{display:flex;gap:8px;align-items:center}.check input{width:auto}.check label{margin:0}footer{border-top:1px solid var(--border);padding:18px 16px 32px;color:var(--muted)}[hidden]{display:none!important}
 @media(max-width:720px){.grid,.tools{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}.card{padding:15px}}
+
+/* ToolNest front-page tool showcase */
+.tool-showcase{margin:26px 0 34px;padding:22px;border:1px solid #2b3856;border-radius:20px;background:linear-gradient(135deg,#101a31,#15142b 58%,#102a2b)}
+.showcase-heading{text-align:center;margin:0 0 8px;font-size:clamp(1.45rem,3vw,2rem)}
+.showcase-subtitle{text-align:center;max-width:700px;margin:0 auto 20px;color:var(--muted)}
+.tool-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tool-info-card{position:relative;padding:17px;border-radius:15px;background:#0b1225;border:1px solid #344366;overflow:hidden}
+.tool-info-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--tool-color,#7c9cff)}
+.tool-info-top{display:flex;align-items:center;gap:11px;margin-bottom:8px}
+.tool-number{display:inline-grid;place-items:center;flex:0 0 38px;height:38px;border-radius:12px;font-weight:850;color:#081126;background:var(--tool-color,#7c9cff)}
+.tool-info-card h3{margin:0;font-size:1.05rem}
+.tool-info-card p{margin:7px 0 0;color:var(--muted);font-size:.93rem}
+.tool-info-card strong{color:var(--text)}
+.tool-color-blue{--tool-color:#7c9cff}
+.tool-color-purple{--tool-color:#c09aff}
+.tool-color-mint{--tool-color:#69d7a2}
+@media(max-width:720px){.tool-showcase{padding:16px}.tool-info-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -17,6 +35,38 @@ header{padding:18px 16px;border-bottom:1px solid var(--border);position:sticky;t
 <section id="authSection" class="grid">
 <div class="card"><h2>Create account</h2><p class="muted small">Use an email address you can access.</p><form id="signupForm"><label for="signupEmail">Email</label><input id="signupEmail" type="email" autocomplete="email" required><label for="signupPassword">Password</label><input id="signupPassword" type="password" minlength="6" autocomplete="new-password" required><button id="signupButton">Sign up</button></form><p id="signupMessage" class="status" role="status"></p></div>
 <div class="card"><h2>Log in</h2><form id="loginForm"><label for="loginEmail">Email</label><input id="loginEmail" type="email" autocomplete="email" required><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required><button id="loginButton">Log in</button><button id="resetPasswordButton" class="secondary" type="button">Forgot password?</button></form><p id="loginMessage" class="status" role="status"></p></div>
+</section>
+
+<section class="tool-showcase" aria-labelledby="toolShowcaseTitle">
+  <h2 id="toolShowcaseTitle" class="showcase-heading">Explore Our <span style="color:var(--accent)">Useful Tools</span></h2>
+  <p class="showcase-subtitle">Sign up or log in to use these simple tools. Quick, easy, and designed to save you time.</p>
+  <div class="tool-info-grid">
+    <article class="tool-info-card tool-color-blue">
+      <div class="tool-info-top"><span class="tool-number">01</span><h3>📝 Word & Character Counter</h3></div>
+      <p><strong>Working:</strong> Counts words, total characters, and characters without spaces as you type.</p>
+      <p><strong>Benefit:</strong> Helps with homework, posts, captions, and writing limits.</p>
+    </article>
+    <article class="tool-info-card tool-color-purple">
+      <div class="tool-info-top"><span class="tool-number">02</span><h3>🔳 QR Code Generator</h3></div>
+      <p><strong>Working:</strong> Turns text or a website link into a scannable QR code.</p>
+      <p><strong>Benefit:</strong> Share links and information quickly by scanning.</p>
+    </article>
+    <article class="tool-info-card tool-color-mint">
+      <div class="tool-info-top"><span class="tool-number">03</span><h3>🖼️ Image Compressor</h3></div>
+      <p><strong>Working:</strong> Reduces an image's file size in your browser.</p>
+      <p><strong>Benefit:</strong> Makes images easier to upload or share; images stay on your device in this tool.</p>
+    </article>
+    <article class="tool-info-card tool-color-blue">
+      <div class="tool-info-top"><span class="tool-number">04</span><h3>🔐 Password Generator</h3></div>
+      <p><strong>Working:</strong> Creates a random password with optional numbers and symbols.</p>
+      <p><strong>Benefit:</strong> Helps make a unique password for your accounts.</p>
+    </article>
+    <article class="tool-info-card tool-color-purple">
+      <div class="tool-info-top"><span class="tool-number">05</span><h3>🧮 Calculator</h3></div>
+      <p><strong>Working:</strong> Calculates basic arithmetic, brackets, and decimals.</p>
+      <p><strong>Benefit:</strong> Get quick answers for everyday calculations.</p>
+    </article>
+  </div>
 </section>
 <section id="accountSummary" class="card" hidden><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">Your account</h2><div id="accountEmail" class="muted"></div></div><button id="logoutButton" class="secondary" type="button">Log out</button></div><div class="plan"><div>Plan: <strong id="currentPlan">Loading…</strong></div><div>Status: <strong id="planStatus">Loading…</strong></div><div>Plan ends: <strong id="planEnd">—</strong></div><div>Free usage this month: <strong id="usageText">—</strong></div></div><p class="muted small">Free usage is tracked in this browser only; it is not secure server-side enforcement.</p><p id="accountMessage" class="status"></p></section>
 <section id="dashboard" class="card" hidden><h2>Plans & payment</h2><p class="muted">Paid plans are activated manually after payment verification.</p>
