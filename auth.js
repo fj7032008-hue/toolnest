@@ -5,12 +5,11 @@
 
 // 1. SUPABASE PROJECT URL
 const SUPABASE_URL =
-  "https://kcfbjixhkxpyntdmnqhx.supabase.co;
+  "https://kcfbjixhkxpyntdmnqhx.supabase.co";
 
 // 2. SUPABASE PUBLISHABLE KEY
-// Replace the placeholder below with your real public/publishable key.
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_zwSvLdZsnR0QdAgOUZ4Avw_znzNv8sk;
+  "sb_publishable_zwSvLdZsnR0QdAgOUZ4Avw_znzNv8sk";
 
 // 3. INITIALIZE SUPABASE
 if (!window.supabase) {
@@ -41,6 +40,7 @@ async function signUp(email, password) {
   });
 
   if (error) throw error;
+
   return data;
 }
 
@@ -53,19 +53,23 @@ async function logIn(email, password) {
     });
 
   if (error) throw error;
+
   return data;
 }
 
 // 6. LOGOUT
 async function logOut() {
   const { error } = await supabaseClient.auth.signOut();
+
   if (error) throw error;
 }
 
 // 7. GET CURRENT USER
 async function getCurrentUser() {
   const { data, error } = await supabaseClient.auth.getUser();
+
   if (error) throw error;
+
   return data.user;
 }
 
