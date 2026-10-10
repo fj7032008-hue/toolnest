@@ -1,317 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="2r9s7RSVEu4_MCbsn8Wc_h5bZdrE2iYNEUxCeHR1YlY" />
-<title>ToolNest - Free Online Tools</title>
-<title>ToolNest - Free Online Tools</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f6fa;color:#171717}
-header{background:#07140d;color:white;text-align:center;padding:34px 15px 28px}
-header h1{margin:0;font-size:42px}
-header p{margin:10px 0 0;font-size:20px;color:#cfd6d2}
-.container{max-width:720px;margin:28px auto;padding:0 16px}
-.card{background:white;border-radius:26px;padding:30px 20px;margin:24px 0;text-align:center;box-shadow:0 5px 20px #00000012}
-.card h2{font-size:30px;margin:0 0 12px}
-.card p{font-size:18px;color:#666;margin:0 0 22px}
-button,.download{border:0;background:#2864e8;color:#fff;border-radius:14px;padding:14px 30px;font-size:18px;cursor:pointer;text-decoration:none;display:inline-block}
-button:hover,.download:hover{background:#174fc8}
-.tool{display:none;margin-top:20px;padding-top:20px;border-top:1px solid #eee}
-input[type=file],input[type=text],input[type=number]{width:100%;padding:13px;border:1px solid #ccc;border-radius:10px;font-size:16px;margin:8px 0 12px}
-.row{display:flex;gap:10px}
-.row>*{flex:1}
-label{display:block;text-align:left;font-weight:bold;margin-top:8px}
-.result{margin-top:18px}
-img.preview{max-width:100%;max-height:300px;border-radius:12px}
-.small{font-size:14px!important;color:#777!important}
-canvas{max-width:100%;margin-top:12px}
-.close{background:#666;margin-left:8px}
-footer{text-align:center;color:#777;padding:25px}
-@media(max-width:520px){header h1{font-size:34px}.card h2{font-size:27px}.row{flex-direction:column}}
-</style>
-</head><script src="https://pl31728276.profitableratecpmnetwork.com/42/0e/7d/420e7dd0df97eefbd42cd7834af2b0e5.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><body>
-<script src="auth.js"></script>
-<header>
-  <h1>🛠️ ToolNest</h1>
-  <p>Free Online Tools for Everyday Tasks</p>
-</header>
+/* ======================================
+   TOOLNEST - AUTHENTICATION
+   SUPABASE JS V2
+   ====================================== */
 
-<div class="container">
+// 1. SUPABASE PROJECT URL
+const SUPABASE_URL =
+  "https://kcfbjixhkxpyntdmnqhx.supabase.co";
 
-<div class="card">
-<h2>🖼️ Image Compressor</h2>
-<p>Compress your images quickly.</p>
-<button onclick="openTool('compressor')">Open Tool</button>
-<div id="compressor" class="tool">
-<input id="compressFile" type="file" accept="image/*">
-<label>Quality: <span id="qualityValue">70%</span></label>
-<input id="quality" type="range" min="10" max="100" value="70" oninput="qualityValue.textContent=this.value+'%'">
-<button onclick="compressImage()">Compress Image</button>
-<div id="compressResult" class="result"></div>
-</div>
-</div>
+// 2. SUPABASE PUBLISHABLE KEY
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_zwSvLdZsnR0QdAgOUZ4Avw_znzNv8sk";
 
-<div class="card">
-<h2>📐 Image Resizer</h2>
-<p>Resize images easily online.</p>
-<button onclick="openTool('resizer')">Open Tool</button>
-<div id="resizer" class="tool">
-<input id="resizeFile" type="file" accept="image/*">
-<div class="row">
-<div><label>Width (px)</label><input id="resizeW" type="number" placeholder="Width"></div>
-<div><label>Height (px)</label><input id="resizeH" type="number" placeholder="Height"></div>
-</div>
-<button onclick="resizeImage()">Resize Image</button>
-<div id="resizeResult" class="result"></div>
-</div>
-</div>
-
-<div class="card">
-<h2>🔄 JPG to PNG</h2>
-<p>Convert images between formats.</p>
-<button onclick="openTool('converter')">Open Tool</button>
-<div id="converter" class="tool">
-<input id="jpgFile" type="file" accept="image/jpeg,image/jpg">
-<button onclick="jpgToPng()">Convert to PNG</button>
-<div id="pngResult" class="result"></div>
-</div>
-</div>
-
-<div class="card">
-<h2>🔗 QR Generator</h2>
-<p>Create QR codes easily.</p>
-<button onclick="openTool('qr')">Open Tool</button>
-<div id="qr" class="tool">
-<input id="qrText" type="text" placeholder="Enter text or website link">
-<button onclick="makeQR()">Generate QR</button>
-<div id="qrResult" class="result"></div>
-</div>
-</div>
-
-<div class="card">
-<h2>🖼️ PNG to JPG</h2>
-<p>Convert PNG images to JPG.</p>
-<button onclick="openTool('pngjpg')">Open Tool</button>
-<div id="pngjpg" class="tool">
-<input id="pngFile" type="file" accept="image/png">
-<button onclick="pngToJpg()">Convert to JPG</button>
-<div id="jpgResult" class="result"></div>
-</div>
-</div>
-
-</div>
-
-<footer>© ToolNest — Free online tools</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-function openTool(id){
-  const el=document.getElementById(id);
-  el.style.display=el.style.display==='block'?'none':'block';
-  if(el.style.display==='block') el.scrollIntoView({behavior:'smooth',block:'center'});
+// 3. CHECK SUPABASE LIBRARY
+if (!window.supabase) {
+  throw new Error(
+    "Supabase JS v2 is missing. Load the Supabase library before auth.js."
+  );
 }
-function loadImage(file){
-  return new Promise((resolve,reject)=>{
-    const img=new Image();
-    img.onload=()=>resolve(img);
-    img.onerror=reject;
-    img.src=URL.createObjectURL(file);
+
+// 4. VALIDATE CONFIGURATION
+if (
+  !SUPABASE_URL ||
+  !SUPABASE_PUBLISHABLE_KEY ||
+  SUPABASE_PUBLISHABLE_KEY ===
+    "PASTE_YOUR_REAL_PUBLISHABLE_KEY_HERE"
+) {
+  throw new Error(
+    "Please check your Supabase URL and Publishable Key."
+  );
+}
+
+// 5. INITIALIZE SUPABASE CLIENT
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+// 6. SIGN UP
+async function signUp(email, password) {
+  if (!email || !password) {
+    throw new Error("Email and password are required.");
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email.trim(),
+    password: password
   });
-}
-function downloadBlob(blob,name){
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download=name;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
-async function compressImage(){
-  const f=document.getElementById('compressFile').files[0];
-  const out=document.getElementById('compressResult');
-  if(!f){out.innerHTML='<p>Please select an image first.</p>';return}
-  const img=await loadImage(f);
-  const c=document.createElement('canvas');
-  c.width=img.naturalWidth;c.height=img.naturalHeight;
-  c.getContext('2d').drawImage(img,0,0);
-  const q=Number(document.getElementById('quality').value)/100;
-  c.toBlob(blob=>{
-    out.innerHTML='<p>Done! Original: '+(f.size/1024).toFixed(1)+' KB — New: '+(blob.size/1024).toFixed(1)+' KB</p>';
-    const a=document.createElement('a');a.className='download';a.textContent='Download Compressed Image';
-    a.href=URL.createObjectURL(blob);a.download='compressed-image.jpg';out.appendChild(a);
-  },'image/jpeg',q);
-}
-async function resizeImage(){
-  const f=document.getElementById('resizeFile').files[0];
-  const w=Number(document.getElementById('resizeW').value);
-  const h=Number(document.getElementById('resizeH').value);
-  const out=document.getElementById('resizeResult');
-  if(!f||!w||!h){out.innerHTML='<p>Please select an image and enter width & height.</p>';return}
-  const img=await loadImage(f),c=document.createElement('canvas');
-  c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
-  c.toBlob(blob=>{
-    const a=document.createElement('a');a.className='download';a.textContent='Download Resized Image';
-    a.href=URL.createObjectURL(blob);a.download='resized-image.jpg';out.innerHTML='';out.appendChild(a);
-  },'image/jpeg',.9);
-}
-async function jpgToPng(){
-  const f=document.getElementById('jpgFile').files[0],out=document.getElementById('pngResult');
-  if(!f){out.innerHTML='<p>Please select a JPG image first.</p>';return}
-  const img=await loadImage(f),c=document.createElement('canvas');
-  c.width=img.naturalWidth;c.height=img.naturalHeight;c.getContext('2d').drawImage(img,0,0);
-  c.toBlob(blob=>{
-    const a=document.createElement('a');a.className='download';a.textContent='Download PNG';
-    a.href=URL.createObjectURL(blob);a.download='converted.png';out.innerHTML='';out.appendChild(a);
-  },'image/png');
-}
-function makeQR(){
-  const text=document.getElementById('qrText').value.trim(),out=document.getElementById('qrResult');
-  if(!text){out.innerHTML='<p>Please enter text or a link.</p>';return}
-  out.innerHTML='';
-  const box=document.createElement('div');out.appendChild(box);
-  new QRCode(box,{text:text,width:220,height:220,correctLevel:QRCode.CorrectLevel.H});
-  setTimeout(()=>{
-    const canvas=box.querySelector('canvas');
-    if(canvas){
-      const a=document.createElement('a');a.className='download';a.textContent='Download QR Code';
-      a.href=canvas.toDataURL('image/png');a.download='toolnest-qr.png';out.appendChild(document.createElement('br'));out.appendChild(a);
-    }
-  },300);
-}
-async function pngToJpg(){
-  const f=document.getElementById('pngFile').files[0],out=document.getElementById('jpgResult');
-  if(!f){out.innerHTML='<p>Please select a PNG image first.</p>';return}
-  const img=await loadImage(f),c=document.createElement('canvas');
-  c.width=img.naturalWidth;c.height=img.naturalHeight;
-  const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0);
-  c.toBlob(blob=>{
-    const a=document.createElement('a');a.className='download';a.textContent='Download JPG';
-    a.href=URL.createObjectURL(blob);a.download='converted.jpg';out.innerHTML='';out.appendChild(a);
-  },'image/jpeg',.92);
-}
-</script></script>
 
-<footer style="text-align:center; margin:35px 0 20px; color:#777;">
-  
-
-  <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:20px;">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="about.html">About ToolNest</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</footer>
-<script async="async" data-cfasync="false" src="https://pl31728278.profitableratecpmnetwork.com/6aa45e79b5967a7daf4a6125cb29f138/invoke.js"></script>
-<div id="container-6aa45e79b5967a7daf4a6125cb29f138"></div>
-</body><!-- ToolNest Premium Payment -->
-<div class="card" style="margin-top:25px;">
-  <h2>💎 ToolNest Premium</h2>
-  <p>Choose your plan</p>
-
-  <div style="background:#f5f5f5;padding:15px;border-radius:10px;margin:10px 0;">
-    <h3>🆓 Free Trial</h3>
-    <p>1 hour free access</p>
-  </div>
-
-  <div style="background:#f5f5f5;padding:15px;border-radius:10px;margin:10px 0;">
-    <h3>💳 Monthly — $10</h3>
-    <p>Premium access for 30 days</p>
-    <button onclick="showPayment('Monthly')">Choose Monthly</button>
-  </div>
-
-  <div style="background:#f5f5f5;padding:15px;border-radius:10px;margin:10px 0;">
-    <h3>👑 Yearly — $99</h3>
-    <p>Premium access for 12 months</p>
-    <button onclick="showPayment('Yearly')">Choose Yearly</button>
-  </div>
-
-  <div id="paymentBox" style="display:none;margin-top:20px;text-align:left;">
-    <h3>💰 Payment</h3>
-
-    <p><b>USDT TRC-20</b></p>
-    <p>Wallet Address:</p>
-    <input type="text"
-      value="YOUR_USDT_TRC20_ADDRESS"
-      readonly
-      style="width:100%;padding:10px;box-sizing:border-box;">
-
-    <p><b>Meezan Bank</b></p>
-    <p>Account Name: YOUR_ACCOUNT_NAME</p>
-    <p>IBAN: YOUR_IBAN</p>
-
-    <p class="small">
-      After payment, keep your transaction/reference ID.
-      Premium access will be activated after payment verification.
-    </p>
-
-    <button onclick="alert('Payment verification will be added with the secure payment backend.')">
-      I Have Paid
-    </button>
-  </div>
-</div>
-
-<script>
-function showPayment(plan) {
-  document.getElementById("paymentBox").style.display = "block";
-  document.getElementById("paymentBox").scrollIntoView({
-    behavior: "smooth"
-  });
-}
-</script>
-
-<script src="auth.js"></script>- Paste this block just BEFORE the final </body> tag in index.html.
-Make sure auth.js is loaded before this block and exposes window.toolnestAuth.
--->
-<div class="card" id="authSection" style="margin:25px auto;max-width:450px;padding:20px;">
-  <h2>🔐 ToolNest Account</h2><script src="auth.js"></script>
-  <input id="authEmail" type="email" placeholder="Email address" autocomplete="email" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
-  <input id="authPassword" type="password" placeholder="Password (minimum 6 characters)" autocomplete="current-password" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
-  <button type="button" onclick="toolnestRegister()">Sign Up</button>
-  <button type="button" onclick="toolnestLogin()">Login</button>
-  <button type="button" onclick="toolnestLogout()">Logout</button>
-  <p id="authMessage" role="status"></p>
-</div><script src="auth.js"></script>
-<script>
-async function toolnestRegister() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const message = document.getElementById("authMessage");
-  if (!email || password.length < 6) {
-    message.textContent = "Enter an email and password of at least 6 characters.";
-    return;
+  if (error) {
+    throw error;
   }
-  try {
-    const result = await window.toolnestAuth.signUp(email, password);
-    if (result.error) throw result.error;
-    message.textContent = result.data.session
-      ? "Account created successfully!"
-      : "Account created. Please check your email for confirmation.";
-  } catch (error) {
-    message.textContent = error.message || "Sign-up failed.";
+
+  return data;
+}
+
+// 7. LOGIN
+async function logIn(email, password) {
+  if (!email || !password) {
+    throw new Error("Email and password are required.");
+  }
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+      email: email.trim(),
+      password: password
+    });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+// 8. LOGOUT
+async function logOut() {
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    throw error;
   }
 }
-async function toolnestLogin() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const message = document.getElementById("authMessage");
-  try {
-    await window.toolnestAuth.logIn(email, password);
-    message.textContent = "Login successful!";
-  } catch (error) {
-    message.textContent = error.message || "Login failed.";
+
+// 9. GET CURRENT USER
+async function getCurrentUser() {
+  const { data, error } =
+    await supabaseClient.auth.getUser();
+
+  if (error) {
+    throw error;
   }
+
+  return data.user;
 }
-async function toolnestLogout() {
-  const message = document.getElementById("authMessage");
-  try {
-    await window.toolnestAuth.logOut();
-    message.textContent = "Logout successful!";
-  } catch (error) {
-    message.textContent = error.message || "Logout failed.";
+
+// 10. GET CURRENT SESSION
+async function getCurrentSession() {
+  const { data, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error) {
+    throw error;
   }
+
+  return data.session;
 }
-</script>
->
-</body>
-</html>
+
+// 11. LISTEN FOR AUTHENTICATION CHANGES
+supabaseClient.auth.onAuthStateChange(
+  (event, session) => {
+    window.dispatchEvent(
+      new CustomEvent("toolnest-auth-change", {
+        detail: {
+          event,
+          session
+        }
+      })
+    );
+  }
+);
+
+// 12. MAKE FUNCTIONS AVAILABLE GLOBALLY
+window.toolnestAuth = {
+  signUp,
+  logIn,
+  logOut,
+  getCurrentUser,
+  getCurrentSession
+};
+
+// 13. READY MESSAGE
+console.log("ToolNest authentication ready.");
