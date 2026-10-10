@@ -3,37 +3,31 @@
    SUPABASE JS V2
    ====================================== */
 
-// 1. SUPABASE PROJECT URL
 const SUPABASE_URL =
   "https://kcfbjixhkxpyntdmnqhx.supabase.co";
 
-// 2. SUPABASE PUBLISHABLE KEY
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_zwSvLdZsnR0QdAgOUZ4Avw_znzNv8sk";
 
-// 3. INITIALIZE SUPABASE
+// Check Supabase library
 if (!window.supabase) {
   throw new Error(
     "Supabase library missing. Load Supabase JS v2 before auth.js."
   );
 }
 
-if (
-  SUPABASE_PUBLISHABLE_KEY ===
-  "PASTE_YOUR_REAL_PUBLISHABLE_KEY_HERE"
-) {
-  throw new Error(
-    "Please paste your Supabase Publishable Key into auth.js."
-  );
-}
-
+// Initialize Supabase
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
 
-// 4. SIGN UP
+// Sign up
 async function signUp(email, password) {
+  if (!email || !password) {
+    throw new Error("Email and password are required.");
+  }
+
   const { data, error } = await supabaseClient.auth.signUp({
     email: email.trim(),
     password: password
@@ -44,8 +38,12 @@ async function signUp(email, password) {
   return data;
 }
 
-// 5. LOGIN
+// Login
 async function logIn(email, password) {
+  if (!email || !password) {
+    throw new Error("Email and password are required.");
+  }
+
   const { data, error } =
     await supabaseClient.auth.signInWithPassword({
       email: email.trim(),
@@ -57,14 +55,14 @@ async function logIn(email, password) {
   return data;
 }
 
-// 6. LOGOUT
+// Logout
 async function logOut() {
   const { error } = await supabaseClient.auth.signOut();
 
   if (error) throw error;
 }
 
-// 7. GET CURRENT USER
+// Get current user
 async function getCurrentUser() {
   const { data, error } = await supabaseClient.auth.getUser();
 
@@ -73,7 +71,16 @@ async function getCurrentUser() {
   return data.user;
 }
 
-// 8. LISTEN FOR AUTHENTICATION CHANGES
+// Get current session
+async function getCurrentSession() {
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) throw error;
+
+  return data.session;
+}
+
+// Authentication change listener
 supabaseClient.auth.onAuthStateChange((event, session) => {
   window.dispatchEvent(
     new CustomEvent("toolnest-auth-change", {
@@ -82,12 +89,13 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
   );
 });
 
-// 9. MAKE FUNCTIONS AVAILABLE TO HTML
+// Make functions available to index.html
 window.toolnestAuth = {
   signUp,
   logIn,
   logOut,
-  getCurrentUser
+  getCurrentUser,
+  getCurrentSession
 };
 
 console.log("ToolNest authentication ready.");
