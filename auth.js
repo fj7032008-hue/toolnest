@@ -9,6 +9,9 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_zwSvLdZsnR0QdAgOUZ4Avw_znzNv8sk";
 
+const TOOLNEST_URL =
+  "https://fj7032008-hue.github.io/toolnest/";
+
 // Check Supabase library
 if (!window.supabase) {
   throw new Error(
@@ -22,7 +25,10 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
-// Sign up
+// ======================================
+// SIGN UP
+// ======================================
+
 async function signUp(email, password) {
   if (!email || !password) {
     throw new Error("Email and password are required.");
@@ -30,15 +36,24 @@ async function signUp(email, password) {
 
   const { data, error } = await supabaseClient.auth.signUp({
     email: email.trim(),
-    password: password
+    password: password,
+    options: {
+      emailRedirectTo: TOOLNEST_URL
+    }
   });
 
-  if (error) throw error;
+  if (error) {
+    console.error("Signup error:", error.message);
+    throw error;
+  }
 
   return data;
 }
 
-// Login
+// ======================================
+// LOGIN
+// ======================================
+
 async function logIn(email, password) {
   if (!email || !password) {
     throw new Error("Email and password are required.");
@@ -50,46 +65,78 @@ async function logIn(email, password) {
       password: password
     });
 
-  if (error) throw error;
+  if (error) {
+    console.error("Login error:", error.message);
+    throw error;
+  }
 
   return data;
 }
 
-// Logout
+// ======================================
+// LOGOUT
+// ======================================
+
 async function logOut() {
   const { error } = await supabaseClient.auth.signOut();
 
-  if (error) throw error;
+  if (error) {
+    console.error("Logout error:", error.message);
+    throw error;
+  }
+
+  return true;
 }
 
-// Get current user
+// ======================================
+// GET CURRENT USER
+// ======================================
+
 async function getCurrentUser() {
   const { data, error } = await supabaseClient.auth.getUser();
 
-  if (error) throw error;
+  if (error) {
+    throw error;
+  }
 
   return data.user;
 }
 
-// Get current session
+// ======================================
+// GET CURRENT SESSION
+// ======================================
+
 async function getCurrentSession() {
   const { data, error } = await supabaseClient.auth.getSession();
 
-  if (error) throw error;
+  if (error) {
+    throw error;
+  }
 
   return data.session;
 }
 
-// Authentication change listener
+// ======================================
+// AUTH STATE CHANGE LISTENER
+// ======================================
+
 supabaseClient.auth.onAuthStateChange((event, session) => {
   window.dispatchEvent(
     new CustomEvent("toolnest-auth-change", {
-      detail: { event, session }
+      detail: {
+        event,
+        session
+      }
     })
   );
+
+  console.log("Auth event:", event);
 });
 
-// Make functions available to index.html
+// ======================================
+// EXPORT FUNCTIONS
+// ======================================
+
 window.toolnestAuth = {
   signUp,
   logIn,
@@ -98,4 +145,4 @@ window.toolnestAuth = {
   getCurrentSession
 };
 
-console.log("ToolNest authentication ready.");
+console.log("ToolNest authentication ready!");
