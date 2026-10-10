@@ -68,7 +68,7 @@ header{padding:18px 16px;border-bottom:1px solid var(--border);position:sticky;t
     </article>
     <article class="tool-info-card tool-color-mint">
       <div class="tool-info-top"><span class="tool-number">06</span><h3>🎬 Video Link Helper</h3></div>
-      <p><strong>Working:</strong> Checks a video link and opens the original platform, or offers a download for a direct video-file URL.</p>
+      <p><strong>Working:</strong> Recognizes supported video links, previews YouTube videos, and offers official save steps or a direct-file download option.</p>
       <p><strong>Benefit:</strong> Quickly reach official save/download options for your own videos or content you have permission to save.</p>
     </article>
   </div>
@@ -141,34 +141,46 @@ $("calculateButton").addEventListener("click",()=>{const s=$("calcDisplay").valu
 function showVideoLinkOptions(){
  const raw=$("videoUrlInput").value.trim(),out=$("videoLinkResult");out.replaceChildren();
  if(!raw){out.textContent="Dost, pehle video ka poora link paste karo.";return}
- let u;try{u=new URL(raw)}catch(e){out.textContent="Link abhi valid nahi lag raha. https:// se shuru hone wala poora link paste karo.";return}
+ let u;try{u=new URL(raw)}catch(e){out.textContent="Ye URL format valid nahi. Poora link https:// se shuru karke paste karo.";return}
  if(!["http:","https:"].includes(u.protocol)){out.textContent="Sirf http/https links supported hain.";return}
  const host=u.hostname.toLowerCase().replace(/^www\./,"");
- const platform=host==="youtube.com"||host==="youtu.be"||host.endsWith(".youtube.com")?"YouTube":host==="tiktok.com"||host.endsWith(".tiktok.com")?"TikTok":host==="instagram.com"||host.endsWith(".instagram.com")?"Instagram":null;
+ const isYT=host==="youtube.com"||host==="youtu.be"||host.endsWith(".youtube.com");
+ const isTT=host==="tiktok.com"||host.endsWith(".tiktok.com");
+ const isIG=host==="instagram.com"||host.endsWith(".instagram.com");
  const p=document.createElement("p");p.className="muted small";
- const open=document.createElement("a");open.href=u.href;open.target="_blank";open.rel="noopener noreferrer";open.className="buttonlink";open.textContent="Open original video"; 
- if(platform){
-   p.textContent=platform+" link pehchan liya! Important: sirf link paste karne se video file download nahi hoti. Is website par platform ke download restrictions ko bypass nahi kiya ja sakta.";
-   out.append(p,open);
-   const steps=document.createElement("p");steps.className="muted small";
-   if(platform==="TikTok")steps.textContent="Save karne ke liye original TikTok app mein video kholo → Share → Save video. Agar Save video option nahi hai, creator ne downloads allow nahi kiye.";
-   else if(platform==="YouTube")steps.textContent="YouTube par apni upload ki hui video ko YouTube Studio se download kar sakte ho. Doosri videos ke liye YouTube app ka Download option ho to use karo; woh aam tor par app ke andar offline viewing hoti hai.";
-   else steps.textContent="Instagram par Reel kholo aur Share/Options mein Download option available ho to use karo. Har Reel par download option available nahi hota.";
-   out.append(steps);return;
+ const open=document.createElement("a");open.href=u.href;open.target="_blank";open.rel="noopener noreferrer";open.className="buttonlink";open.textContent="Open original video";
+ if(isYT){
+   let id="";
+   if(host==="youtu.be") id=u.pathname.split("/").filter(Boolean)[0]||"";
+   else if(u.pathname==="/watch") id=u.searchParams.get("v")||"";
+   else {const m=u.pathname.match(/^\/(?:shorts|embed|live)\/([^/?]+)/);if(m)id=m[1]}
+   if(id && /^[\w-]{6,20}$/.test(id)){
+     p.textContent="YouTube link pehchan liya! Neeche preview aur official options hain. Is preview se video file automatically download nahi hoti.";
+     const frame=document.createElement("iframe");frame.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id);frame.title="YouTube video preview";frame.loading="lazy";frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";frame.allowFullscreen=true;frame.style.cssText="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;margin:10px 0";
+     const steps=document.createElement("p");steps.className="muted small";steps.textContent="Download: apni uploaded video ke liye YouTube Studio → Content → menu → Download. Doosri videos ke liye YouTube ka official Download option agar available ho to use karo.";
+     out.append(p,frame,open,steps);return;
+   }
+   p.textContent="YouTube domain mil gaya, lekin video ID read nahi hui. Poora watch/share link paste karo.";out.append(p,open);return;
  }
- if(/\.(mp4|webm|mov|m4v)(?:$|[?#])/i.test(u.pathname+u.search+u.hash)){
-   p.textContent="Direct video-file jaisa link lag raha hai. Neeche button try karo. Download server ki permission aur browser par depend karega.";
+ if(isTT||isIG){
+   const platform=isTT?"TikTok":"Instagram";
+   p.textContent=platform+" link pehchan liya! Social-platform URL ko direct MP4 mein badalne ke liye platform ki permission aur supported download service chahiye. Is tool mein restrictions bypass nahi hotin.";
+   const steps=document.createElement("p");steps.className="muted small";
+   steps.textContent=isTT?"TikTok: original video kholo → Share → Save video, agar creator ne option allow kiya ho.":"Instagram: Reel kholo → Share/Options mein Download dekho, agar available ho.";
+   out.append(p,open,steps);return;
+ }
+ if(/\.(mp4|webm|mov|m4v)$/i.test(u.pathname)){
+   p.textContent="Direct video-file URL lag raha hai. Download try karo; success server ki permissions aur browser par depend karega.";
    const a=document.createElement("a");a.href=u.href;a.download="video";a.target="_blank";a.rel="noopener noreferrer";a.className="buttonlink";a.textContent="Try download video";
    out.append(p,a);return;
  }
- p.textContent="Link mil gaya, lekin direct video file nahi lag raha. Original link khol kar official Download/Save option check karo.";
+ p.textContent="Link valid hai, lekin supported social-video URL ya direct video file nahi pehchani gayi.";
  out.append(p,open);
 }
 $("checkVideoLinkButton").addEventListener("click",showVideoLinkOptions);
 $("videoUrlInput").addEventListener("input",()=>{
  const v=$("videoUrlInput").value.trim();
  if(!v){$("videoLinkResult").textContent="Paste a link above. Options and instructions will appear here.";return}
- // Show feedback automatically as soon as a complete URL is pasted/typed.
  if(/^https?:\/\/\S+/i.test(v)) showVideoLinkOptions();
  else $("videoLinkResult").textContent="Link type ho raha hai… poora https:// link paste karo.";
 });
