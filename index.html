@@ -39,6 +39,67 @@ header{padding:18px 16px;border-bottom:1px solid var(--border);position:sticky;t
 <div class="card"><h2>Log in</h2><form id="loginForm"><label for="loginEmail">Email</label><input id="loginEmail" type="email" autocomplete="email" required><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required><button id="loginButton">Log in</button><button id="resetPasswordButton" class="secondary" type="button">Forgot password?</button></form><p id="loginMessage" class="status" role="status"></p></div>
 </section>
 
+ <section class="tool-showcase" aria-labelledby="toolShowcaseTitle">
+  <h2 id="toolShowcaseTitle" class="showcase-heading">Explore Our <span style="color:var(--accent)">Useful Tools</span></h2>
+  <p class="showcase-subtitle">Sign up or log in to use these simple tools. Quick, easy, and designed to save you time.</p>
+  <div class="tool-info-grid">
+    <article class="tool-info-card tool-color-blue">
+      <div class="tool-info-top"><span class="tool-number">01</span><h3>📝 Word & Character Counter</h3></div>
+      <p><strong>Working:</strong> Counts words, total characters, and characters without spaces as you type.</p>
+      <p><strong>Benefit:</strong> Helps with homework, posts, captions, and writing limits.</p>
+    </article>
+    <article class="tool-info-card tool-color-purple">
+      <div class="tool-info-top"><span class="tool-number">02</span><h3>🔳 QR Code Generator</h3></div>
+      <p><strong>Working:</strong> Turns text or a website link into a scannable QR code.</p>
+      <p><strong>Benefit:</strong> Share links and information quickly by scanning.</p>
+    </article>
+    <article class="tool-info-card tool-color-mint">
+      <div class="tool-info-top"><span class="tool-number">03</span><h3>🖼️ Image Compressor</h3></div>
+      <p><strong>Working:</strong> Reduces an image's file size in your browser.</p>
+      <p><strong>Benefit:</strong> Makes images easier to upload or share; images stay on your device in this tool.</p>
+    </article>
+    <article class="tool-info-card tool-color-blue">
+      <div class="tool-info-top"><span class="tool-number">04</span><h3>🔐 Password Generator</h3></div>
+      <p><strong>Working:</strong> Creates a random password with optional numbers and symbols.</p>
+      <p><strong>Benefit:</strong> Helps make a unique password for your accounts.</p>
+    </article>
+    <article class="tool-info-card tool-color-purple">
+      <div class="tool-info-top"><span class="tool-number">05</span><h3>🧮 Calculator</h3></div>
+      <p><strong>Working:</strong> Calculates basic arithmetic, brackets, and decimals.</p>
+      <p><strong>Benefit:</strong> Get quick answers for everyday calculations.</p>
+    </article>
+    <article class="tool-info-card tool-color-mint">
+      <div class="tool-info-top"><span class="tool-number">06</span><h3>🎬 Video Link Helper</h3></div>
+      <p><strong>Working:</strong> Recognizes supported video links, previews YouTube videos, and offers official save steps or a direct-file download option.</p>
+      <p><strong>Benefit:</strong> Quickly reach official save/download options for your own videos or content you have permission to save.</p>
+    </article>
+    <article class="tool-info-card tool-color-blue"><div class="tool-info-top"><span class="tool-number">07</span><h3>✍️ CaptionCraft</h3></div><p><strong>Working:</strong> Creates caption starters from your topic and style.</p><p><strong>Benefit:</strong> Get quick ideas for posts without an AI service.</p></article>
+    <article class="tool-info-card tool-color-purple"><div class="tool-info-top"><span class="tool-number">08</span><h3>📚 Study Notes Maker</h3></div><p><strong>Working:</strong> Turns pasted notes into clean, readable bullet points.</p><p><strong>Benefit:</strong> Organize revision material quickly.</p></article>
+    <article class="tool-info-card tool-color-mint"><div class="tool-info-top"><span class="tool-number">09</span><h3>🧹 Text Cleaner</h3></div><p><strong>Working:</strong> Removes extra spaces and cleans line breaks.</p><p><strong>Benefit:</strong> Make copied text easier to read.</p></article>
+    <article class="tool-info-card tool-color-blue"><div class="tool-info-top"><span class="tool-number">10</span><h3>🔠 Case Changer</h3></div><p><strong>Working:</strong> Converts text to upper, lower, title, or sentence case.</p><p><strong>Benefit:</strong> Format text in one tap.</p></article>
+    <article class="tool-info-card tool-color-purple"><div class="tool-info-top"><span class="tool-number">11</span><h3>🎨 ColorNest</h3></div><p><strong>Working:</strong> Pick a color and view HEX and RGB values.</p><p><strong>Benefit:</strong> Copy color codes for websites and designs.</p></article>
+    <article class="tool-info-card tool-color-mint"><div class="tool-info-top"><span class="tool-number">12</span><h3>📐 Image Info</h3></div><p><strong>Working:</strong> Shows image dimensions, format, and file size.</p><p><strong>Benefit:</strong> Check image details before uploading.</p></article>
+    <article class="tool-info-card tool-color-blue"><div class="tool-info-top"><span class="tool-number">13</span><h3>📅 Date Difference</h3></div><p><strong>Working:</strong> Calculates days between two dates.</p><p><strong>Benefit:</strong> Plan deadlines and events.</p></article>
+    <article class="tool-info-card tool-color-purple"><div class="tool-info-top"><span class="tool-number">14</span><h3>⏳ Focus Timer</h3></div><p><strong>Working:</strong> Runs a simple focus countdown.</p><p><strong>Benefit:</strong> Keep study or work sessions on track.</p></article>
+    <article class="tool-info-card tool-color-mint"><div class="tool-info-top"><span class="tool-number">15</span><h3>🔍 Text Diff</h3></div><p><strong>Working:</strong> Compares two texts line by line.</p><p><strong>Benefit:</strong> Spot edits and changed lines.</p></article>
+    <article class="tool-info-card tool-color-blue"><div class="tool-info-top"><span class="tool-number">16</span><h3>🧾 Quick Invoice</h3></div><p><strong>Working:</strong> Builds a simple printable invoice.</p><p><strong>Benefit:</strong> Print or save it as PDF from your browser.</p></article>
+  </div>
+</section>
+<section id="accountSummary" class="card" hidden><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">Your account</h2><div id="accountEmail" class="muted"></div></div><button id="logoutButton" class="secondary" type="button">Log out</button></div><div class="plan"><div>Plan: <strong id="currentPlan">Loading…</strong></div><div>Status: <strong id="planStatus">Loading…</strong></div><div>Plan ends: <strong id="planEnd">—</strong></div><div>Free usage this month: <strong id="usageText">—</strong></div></div><p class="muted small">Free usage is tracked in this browser only; it is not secure server-side enforcement.</p><p id="accountMessage" class="status"></p></section>
+<section id="dashboard" class="card" hidden><h2>Plans & payment</h2><p class="muted">Paid plans are activated manually after payment verification.</p>
+<div class="grid"><div class="plan"><h3>Free</h3><div class="price">$0</div><p class="muted">Basic access • 1 hour/month</p><button id="freePlanButton" class="secondary" type="button">Use Free plan</button></div><div class="plan"><h3>Monthly</h3><div class="price">$10 <span class="muted small">/ month</span></div><button type="button" class="choose-plan" data-plan="monthly">Choose Monthly</button></div><div class="plan"><h3>Yearly</h3><div class="price">$99 <span class="muted small">/ year</span></div><button type="button" class="choose-plan" data-plan="yearly">Choose Yearly</button></div></div>
+<div class="card"><h3>Submit payment reference</h3><p class="muted small">Pay first, then submit the real transaction reference. A reference alone does not prove payment.</p><label for="paymentPlan">Plan</label><select id="paymentPlan"><option value="monthly">Monthly — $10</option><option value="yearly">Yearly — $99</option></select><label for="paymentMethod">Payment method</label><select id="paymentMethod"><option>USDT TRC20</option><option>Meezan Bank</option></select>
+<div class="plan"><h4>USDT TRC20</h4><p><strong>Wallet:</strong> <span id="usdtWallet">TF6SrMWKTNoDR41Y2hhEACHDKWuFBFau34</span></p><button id="copyWalletButton" class="secondary" type="button">Copy wallet address</button><p class="muted small">Check network and address carefully before sending. Crypto transfers are generally irreversible.</p></div>
+<div class="plan"><h4>Meezan Bank</h4><p><strong>Account title:</strong> MUHAMMAD FAISAL</p><p><strong>Account number:</strong> 00300116324508</p><p><strong>IBAN:</strong> PK56MEZN0000300116324508</p><p><strong>Branch:</strong> MEEZAN DIGITAL CENTRE</p></div>
+<form id="paymentForm"><label for="transactionReference">Transaction reference / ID</label><input id="transactionReference" maxlength="180" required placeholder="Enter real transaction reference"><button id="submitPaymentButton">Submit payment request</button></form><p id="paymentMessage" class="status" role="status"></p>
+</div>
+<div class="card"><h3>My payment requests</h3><button id="refreshMyPayments" class="secondary" type="button">Refresh my requests</button><div id="myPayments"><p class="muted">Log in to view requests.</p></div></div>
+</section>
+<section id="adminPanel" class="card" hidden><h2>🔐 ToolNest Admin Dashboard</h2><p class="muted">Verify the actual bank/wallet payment before approving.</p><button id="refreshPayments" class="secondary" type="button">Refresh payments</button><p id="adminMessage" class="status" role="status"></p><div id="pendingPayments"></div></section>
+<div id="toolsSection" hidden>
+<h2 class="sectiontitle">Tool Folders</h2><p class="muted">Dost, folder ke naam par click karo—us category ke tools khul jayenge.</p>
+<div class="folder-grid"><button class="folder-button" id="openGeneralFolder" type="button"><strong>🧰 General Tools · 16</strong><span>Text, image, calculator, productivity aur doosre tools</span></button><button class="folder-button"
+
 const w=window.open("","_blank");if(!w){$("invoiceResult").textContent="Browser ne popup block kiya. Site ke liye popups allow karke dobara try karo.";return}
  w.document.open();w.document.write(doc);w.document.close();$("invoiceResult").textContent=`Invoice ready: ${qty} × ${rate.toFixed(2)} = ${total.toFixed(2)}. Print dialog se Save as PDF choose kar sakte ho.`;
 });
