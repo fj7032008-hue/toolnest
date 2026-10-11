@@ -91,7 +91,7 @@ header{padding:18px 16px;border-bottom:1px solid var(--border);position:sticky;t
 <div class="card"><h3>🖼️ Image compressor</h3><p class="muted small">Compression happens in your browser; the image is not uploaded by this tool.</p><label for="imageInput">Choose image</label><input id="imageInput" type="file" accept="image/*"><label for="imageQuality">JPEG quality</label><input id="imageQuality" type="range" min="30" max="95" value="75"><button id="compressImageButton" type="button">Compress image</button><div id="imageResult" class="result">Choose an image to begin.</div></div>
 <div class="card"><h3>🔐 Password generator</h3><label for="passwordLength">Length (8–64)</label><input id="passwordLength" type="number" min="8" max="64" value="16"><div class="check"><input id="includeNumbers" type="checkbox" checked><label for="includeNumbers">Include numbers</label></div><div class="check"><input id="includeSymbols" type="checkbox" checked><label for="includeSymbols">Include symbols</label></div><button id="generatePasswordButton" type="button">Generate password</button><div id="passwordResult" class="result">Generated password appears here.</div><button id="copyPasswordButton" class="secondary" type="button">Copy password</button></div>
 <div class="card"><h3>🧮 Calculator</h3><label for="calcDisplay">Expression</label><input id="calcDisplay" inputmode="decimal" placeholder="Example: (12 + 8) * 3"><button id="calculateButton" type="button">Calculate</button><div id="calcResult" class="result">Result appears here.</div><p class="muted small">Supports basic arithmetic, brackets, and decimals.</p></div>
-<div class="card"><h3>🎬 Video Link Helper</h3><p class="muted small">Paste a direct MP4/video-file URL. A Download Video button appears automatically. Downloads depend on the video host and browser permissions.</p><label for="videoUrlInput">Paste video link</label><input id="videoUrlInput" type="url" inputmode="url" placeholder="Paste direct MP4 URL (https://...mp4)" autocomplete="url"><button id="checkVideoLinkButton" type="button">Show Download Button</button><div id="videoLinkResult" class="result" role="status" aria-live="polite">Paste a link above. Options and instructions will appear here.</div></div>
+<div class="card"><h3>🎬 Video Link Helper</h3><p class="muted small">Direct video-file links can download if the host permits it. YouTube, TikTok and Instagram links open the original platform and show official save options; this tool does not bypass platform restrictions.</p><label for="videoUrlInput">Paste video link</label><input id="videoUrlInput" type="text" inputmode="url" placeholder="Paste YouTube, TikTok, Instagram or direct MP4 link" autocomplete="url"><button id="checkVideoLinkButton" type="button">Check link / Show options</button><div id="videoLinkResult" class="result" role="status" aria-live="polite">Paste a link above. Options and instructions will appear here.</div></div>
 </section></div>
 </main>
 <footer><div>© <span id="year"></span> ToolNest.</div><div class="small">Never put a Supabase service-role key or other secret in this HTML file.</div></footer>
@@ -138,50 +138,96 @@ $("compressImageButton").addEventListener("click",()=>{const f=$("imageInput").f
 $("generatePasswordButton").addEventListener("click",()=>{const n=Math.max(8,Math.min(64,Number($("passwordLength").value)||16));$("passwordLength").value=n;let chars="abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";if($("includeNumbers").checked)chars+="23456789";if($("includeSymbols").checked)chars+="!@#$%^&*()-_=+[]{}?";const a=new Uint32Array(n);crypto.getRandomValues(a);$("passwordResult").textContent=Array.from(a,v=>chars[v%chars.length]).join("")});
 $("copyPasswordButton").addEventListener("click",async()=>{const v=$("passwordResult").textContent;if(!v||v.includes("appears here"))return;try{await navigator.clipboard.writeText(v);msg("accountMessage","Password copied.","success")}catch(e){msg("accountMessage","Copy nahi hua; manually select karein.","warning")}});
 $("calculateButton").addEventListener("click",()=>{const s=$("calcDisplay").value.trim();if(!s)return $("calcResult").textContent="Expression enter karein.";if(!/^[0-9+\-*/().\s]+$/.test(s))return $("calcResult").textContent="Sirf numbers, + - * / brackets aur decimals use karein.";try{const n=Function('"use strict";return ('+s+')')();if(typeof n!=="number"||!Number.isFinite(n))throw Error();$("calcResult").textContent="Result: "+n}catch(e){$("calcResult").textContent="Expression sahi nahi hai."}});
-function showVideoLinkOptions(){
- const input=$("videoUrlInput"),raw=input.value.trim(),out=$("videoLinkResult");out.replaceChildren();
- if(!raw){out.textContent="Dost, pehle direct MP4 video URL paste karo.";return}
- // Accept a full URL and also recover common links pasted without the scheme.
+async function showVideoLinkOptions(){
+ const input=$("videoUrlInput"),out=$("videoLinkResult");
+ out.replaceChildren();
+ let raw=(input.value||"").trim();
+ if(!raw){out.textContent="Dost, pehle video link paste karo.";return}
+
+ // If text was copied along with a URL, extract the first web link.
+ const match=raw.match(/https?:\/\/[^\s<>"']+|(?:www\.)?[a-z0-9.-]+\.[a-z]{2,}(?:\/[^\s<>"']*)?/i);
+ if(match) raw=match[0];
+ raw=raw.replace(/[),.;!?]+$/,"");
+
  let u;
- try { u = new URL(/^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : "https://" + raw); }
- catch(e){out.textContent="URL samajh nahi aaya. Poora direct video link paste karo, jaise https://example.com/video.mp4";return}
- if(!["http:","https:"].includes(u.protocol)){out.textContent="Sirf http:// ya https:// video links supported hain.";return}
+ try {
+   u=new URL(/^[a-z][a-z0-9+.-]*:\/\//i.test(raw)?raw:"https://"+raw);
+ } catch(e) {
+   out.textContent="Link read nahi ho raha. Sirf video ka poora URL paste karo, jaise https://example.com/video.mp4";
+   return;
+ }
+ if(!["http:","https:"].includes(u.protocol)){
+   out.textContent="Sirf http:// ya https:// links supported hain.";return;
+ }
+
+ const host=u.hostname.toLowerCase().replace(/^www\./,"");
  const path=u.pathname.toLowerCase();
  const directVideo=/\.(mp4|webm|mov|m4v|ogv)$/i.test(path);
- const host=u.hostname.toLowerCase().replace(/^www\./,"");
  const isYT=host==="youtube.com"||host==="youtu.be"||host.endsWith(".youtube.com");
  const isTT=host==="tiktok.com"||host.endsWith(".tiktok.com");
  const isIG=host==="instagram.com"||host.endsWith(".instagram.com");
 
- if(directVideo){
-   const note=document.createElement("p");note.className="muted small";
-   note.textContent="Video link mil gaya. Neeche button dabao. Agar server download allow karta hai, video mobile ke Downloads folder mein save hogi; kuch servers/browser direct saving rok sakte hain.";
+ const makeLink=(href,label)=>{
    const a=document.createElement("a");
-   a.href=u.href;a.download="video."+path.split(".").pop();a.className="buttonlink";a.textContent="⬇ Download Video";
-   a.rel="noopener noreferrer";
-   a.addEventListener("click",()=>{
-     // A cross-origin host may ignore the download attribute; let the browser handle that case.
-     a.setAttribute("aria-label","Download video file");
-   });
-   out.append(note,a);return;
- }
- const open=document.createElement("a");open.href=u.href;open.target="_blank";open.rel="noopener noreferrer";open.className="buttonlink";open.textContent="Open original video";
- const note=document.createElement("p");note.className="muted small";
+   a.href=href;a.target="_blank";a.rel="noopener noreferrer";
+   a.className="buttonlink";a.textContent=label;return a;
+ };
+
  if(isYT||isTT||isIG){
-   const platform=isYT?"YouTube":(isTT?"TikTok":"Instagram");
-   note.textContent=platform+" ka page link mila, direct MP4 file URL nahi. Is tool mein MP4/video file ka direct URL paste karo. Social video ko MP4 mein badalna har link par supported nahi hota.";
- } else {
-   note.textContent="Yeh valid web URL lagta hai, lekin direct video file extension (.mp4, .webm, .mov, .m4v, .ogv) nahi mili. Direct video-file URL paste karo.";
+   const platform=isYT?"YouTube":isTT?"TikTok":"Instagram";
+   const note=document.createElement("p");note.className="muted small";
+   note.textContent=platform+" ka page link mila hai, direct video-file URL nahi. Original app/site ke official Download ya Save option ka istemal karo; har video download ke liye available nahi hoti.";
+   out.append(note,makeLink(u.href,"Open original video"));
+   if(isTT)out.append(makeLink("https://support.tiktok.com/en/using-tiktok/exploring-videos/video-downloads","TikTok download help"));
+   if(isYT)out.append(makeLink("https://support.google.com/youtube/answer/56100?co=GENIE.Platform%3DAndroid&hl=en","YouTube download help"));
+   if(isIG){
+     const help=document.createElement("p");help.className="muted small";
+     help.textContent="Instagram par creator ki permission ke mutabiq Reel ke menu mein Download ya Save option check karo.";
+     out.append(help);
+   }
+   return;
  }
- out.append(note,open);
+
+ if(!directVideo){
+   const note=document.createElement("p");note.className="muted small";
+   note.textContent="URL mil gaya, lekin yeh direct video file nahi lagta. Direct .mp4, .webm, .mov, .m4v ya .ogv file link paste karo.";
+   out.append(note,makeLink(u.href,"Open link"));
+   return;
+ }
+
+ const note=document.createElement("p");note.className="muted small";
+ note.textContent="Direct video URL mil gaya. Download try karo. Agar video host browser access block kare (CORS/server restriction), to video ko naye tab mein kholne ka option milega.";
+ const button=document.createElement("button");
+ button.type="button";button.textContent="⬇ Download Video";
+ button.addEventListener("click",async()=>{
+   button.disabled=true;button.textContent="Preparing download…";
+   try{
+     const response=await fetch(u.href,{mode:"cors"});
+     if(!response.ok)throw new Error("HTTP "+response.status);
+     const blob=await response.blob();
+     if(!blob.size)throw new Error("Empty file");
+     const objectUrl=URL.createObjectURL(blob);
+     const a=document.createElement("a");
+     const ext=(path.match(/\.(mp4|webm|mov|m4v|ogv)$/i)||[])[1]||"mp4";
+     a.href=objectUrl;a.download="video."+ext;
+     document.body.append(a);a.click();a.remove();
+     setTimeout(()=>URL.revokeObjectURL(objectUrl),60000);
+     button.textContent="Download started";
+     note.textContent="Download start ho gaya. Downloads folder check karo.";
+   }catch(e){
+     button.disabled=false;button.textContent="Open video file instead";
+     button.onclick=()=>window.open(u.href,"_blank","noopener,noreferrer");
+     note.textContent="Server/browser ne direct download allow nahi kiya. Neeche button se video kholo; agar host allow karta hai to browser menu se save kar sakte ho.";
+   }
+ });
+ out.append(note,button);
 }
 $("checkVideoLinkButton").addEventListener("click",showVideoLinkOptions);
 $("videoUrlInput").addEventListener("input",()=>{
  const v=$("videoUrlInput").value.trim();
- if(!v){$("videoLinkResult").textContent="Paste a direct MP4/video URL above. Download button will appear automatically.";return}
- // Show a download button as soon as a recognizable direct video URL is pasted.
- if(/\.(mp4|webm|mov|m4v|ogv)(?:[?#].*)?$/i.test(v) || /^https?:\/\/\S+/i.test(v) || /^[\w.-]+\.[a-z]{2,}\//i.test(v)) showVideoLinkOptions();
- else $("videoLinkResult").textContent="Link type ho raha hai… direct video ka poora URL paste karo.";
+ if(!v){$("videoLinkResult").textContent="Paste a direct video URL above. Options will appear here.";return;}
+ if(/https?:\/\/\S+/i.test(v)||/^[\w.-]+\.[a-z]{2,}(?:\/|$)/i.test(v))showVideoLinkOptions();
+ else $("videoLinkResult").textContent="Link type ho raha hai… poora video URL paste karo.";
 });
 db.auth.onAuthStateChange((_event,session)=>setTimeout(()=>setSession(session),0));
 db.auth.getSession().then(({data})=>setSession(data.session));
