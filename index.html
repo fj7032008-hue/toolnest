@@ -1,100 +1,98 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ToolNest — Online Tools</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>ToolNest — Online & Crypto Tools</title>
 <style>
 :root{--bg:#0b1020;--panel:#121a2e;--panel2:#17223a;--text:#edf2ff;--muted:#aab6d3;--accent:#7c9cff;--border:#2b3856;--good:#69d7a2;--bad:#ff8d9a}
 *{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top left,#1b2a50 0,var(--bg) 42rem)}
 header{padding:18px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:#0b1020ed;z-index:5}.head,main,footer{max-width:1100px;margin:auto}.head{display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{font-size:1.4rem;font-weight:850}.brand span{color:var(--accent)}main{padding:24px 16px 42px}.hero{padding:18px 0}.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.1;margin:.2em 0}.muted{color:var(--muted)}.small{font-size:.88rem}.grid,.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--border);border-radius:16px;padding:18px;margin:16px 0;min-width:0;overflow-wrap:anywhere}.card h2,.card h3{margin-top:0}label{display:block;font-weight:650;margin:12px 0 6px}input,textarea,select{width:100%;padding:11px 12px;background:#0c1427;color:var(--text);border:1px solid var(--border);border-radius:10px;font:inherit}textarea{min-height:110px;resize:vertical}button,.buttonlink{border:0;border-radius:10px;padding:11px 15px;background:linear-gradient(120deg,#7c9cff,#9b8cff);color:#091126;font:inherit;font-weight:750;cursor:pointer;display:inline-block;text-decoration:none;margin-top:10px}button:disabled{opacity:.55;cursor:wait}.secondary{background:#293653;color:var(--text);border:1px solid #3a4b70}.danger{background:#572b3b;color:#ffe8ec;border:1px solid #804254}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.status{min-height:1.4em;overflow-wrap:anywhere}.success{color:var(--good)}.error{color:var(--bad)}.warning{color:#ffd27a}.plan,.result{background:#0c1427a8;border:1px solid var(--border);border-radius:12px;padding:14px;margin:12px 0}.price{font-size:2rem;font-weight:850}.sectiontitle{margin-top:34px}.check{display:flex;gap:8px;align-items:center}.check input{width:auto}.check label{margin:0}footer{border-top:1px solid var(--border);padding:18px 16px 32px;color:var(--muted)}[hidden]{display:none!important}
 @media(max-width:720px){.grid,.tools{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}.card{padding:15px}}
-
-/* ToolNest front-page tool showcase */
 .tool-showcase{margin:26px 0 34px;padding:22px;border:1px solid #2b3856;border-radius:20px;background:linear-gradient(135deg,#101a31,#15142b 58%,#102a2b)}
-.showcase-heading{text-align:center;margin:0 0 8px;font-size:clamp(1.45rem,3vw,2rem)}
-.showcase-subtitle{text-align:center;max-width:700px;margin:0 auto 20px;color:var(--muted)}
-.tool-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.tool-info-card{position:relative;padding:17px;border-radius:15px;background:#0b1225;border:1px solid #344366;overflow:hidden}
-.tool-info-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--tool-color,#7c9cff)}
-.tool-info-top{display:flex;align-items:center;gap:11px;margin-bottom:8px}
-.tool-number{display:inline-grid;place-items:center;flex:0 0 38px;height:38px;border-radius:12px;font-weight:850;color:#081126;background:var(--tool-color,#7c9cff)}
-.tool-info-card h3{margin:0;font-size:1.05rem}
-.tool-info-card p{margin:7px 0 0;color:var(--muted);font-size:.93rem}
-.tool-info-card strong{color:var(--text)}
-.tool-color-blue{--tool-color:#7c9cff}
-.tool-color-purple{--tool-color:#c09aff}
-.tool-color-mint{--tool-color:#69d7a2}
-@media(max-width:720px){.tool-showcase{padding:16px}.tool-info-grid{grid-template-columns:1fr}}
-
+.showcase-heading{text-align:center;margin:0 0 8px;font-size:clamp(1.45rem,3vw,2rem)}.showcase-subtitle{text-align:center;max-width:700px;margin:0 auto 20px;color:var(--muted)}
+.tool-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.tool-info-card{position:relative;padding:17px;border-radius:15px;background:#0b1225;border:1px solid #344366;overflow:hidden}
+.tool-info-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--tool-color,#7c9cff)}.tool-info-top{display:flex;align-items:center;gap:11px;margin-bottom:8px}.tool-number{display:inline-grid;place-items:center;flex:0 0 38px;height:38px;border-radius:12px;font-weight:850;color:#081126;background:var(--tool-color,#7c9cff)}
+.tool-info-card h3{margin:0;font-size:1.05rem}.tool-info-card p{margin:7px 0 0;color:var(--muted);font-size:.93rem}.tool-info-card strong{color:var(--text)}
+.tool-color-blue{--tool-color:#7c9cff}.tool-color-purple{--tool-color:#c09aff}.tool-color-mint{--tool-color:#69d7a2}
+.crypto-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.crypto-card{background:#0b1225;border:1px solid #344366;border-radius:15px;padding:17px;min-width:0}.crypto-card h3{margin:0 0 6px}.crypto-card .benefit{color:var(--muted);font-size:.9rem;margin:4px 0 12px}.crypto-card .result{overflow-wrap:anywhere}
+.crypto-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.crypto-fields label{font-size:.9rem}.crypto-fields input,.crypto-fields select{min-width:0}.crypto-card button{margin-right:5px}
+@media(max-width:720px){.tool-showcase{padding:16px}.tool-info-grid,.crypto-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header><div class="head"><div class="brand">Tool<span>Nest</span></div><div class="muted">Useful online tools in one place</div></div></header>
 <main>
 <section class="hero"><p class="muted">ALL-IN-ONE ONLINE TOOLS</p><h1>Useful tools, <span style="color:var(--accent)">all in one nest.</span></h1><p class="muted">Create an account, choose a plan, and use simple browser-based tools.</p></section>
+
 <section id="authSection" class="grid">
 <div class="card"><h2>Create account</h2><p class="muted small">Use an email address you can access.</p><form id="signupForm"><label for="signupEmail">Email</label><input id="signupEmail" type="email" autocomplete="email" required><label for="signupPassword">Password</label><input id="signupPassword" type="password" minlength="6" autocomplete="new-password" required><button id="signupButton">Sign up</button></form><p id="signupMessage" class="status" role="status"></p></div>
 <div class="card"><h2>Log in</h2><form id="loginForm"><label for="loginEmail">Email</label><input id="loginEmail" type="email" autocomplete="email" required><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required><button id="loginButton">Log in</button><button id="resetPasswordButton" class="secondary" type="button">Forgot password?</button></form><p id="loginMessage" class="status" role="status"></p></div>
 </section>
 
 <section class="tool-showcase" aria-labelledby="toolShowcaseTitle">
-  <h2 id="toolShowcaseTitle" class="showcase-heading">Explore Our <span style="color:var(--accent)">Useful Tools</span></h2>
-  <p class="showcase-subtitle">Sign up or log in to use these simple tools. Quick, easy, and designed to save you time.</p>
-  <div class="tool-info-grid">
-    <article class="tool-info-card tool-color-blue">
-      <div class="tool-info-top"><span class="tool-number">01</span><h3>📝 Word & Character Counter</h3></div>
-      <p><strong>Working:</strong> Counts words, total characters, and characters without spaces as you type.</p>
-      <p><strong>Benefit:</strong> Helps with homework, posts, captions, and writing limits.</p>
-    </article>
-    <article class="tool-info-card tool-color-purple">
-      <div class="tool-info-top"><span class="tool-number">02</span><h3>🔳 QR Code Generator</h3></div>
-      <p><strong>Working:</strong> Turns text or a website link into a scannable QR code.</p>
-      <p><strong>Benefit:</strong> Share links and information quickly by scanning.</p>
-    </article>
-    <article class="tool-info-card tool-color-mint">
-      <div class="tool-info-top"><span class="tool-number">03</span><h3>🖼️ Image Compressor</h3></div>
-      <p><strong>Working:</strong> Reduces an image's file size in your browser.</p>
-      <p><strong>Benefit:</strong> Makes images easier to upload or share; images stay on your device in this tool.</p>
-    </article>
-    <article class="tool-info-card tool-color-blue">
-      <div class="tool-info-top"><span class="tool-number">04</span><h3>🔐 Password Generator</h3></div>
-      <p><strong>Working:</strong> Creates a random password with optional numbers and symbols.</p>
-      <p><strong>Benefit:</strong> Helps make a unique password for your accounts.</p>
-    </article>
-    <article class="tool-info-card tool-color-purple">
-      <div class="tool-info-top"><span class="tool-number">05</span><h3>🧮 Calculator</h3></div>
-      <p><strong>Working:</strong> Calculates basic arithmetic, brackets, and decimals.</p>
-      <p><strong>Benefit:</strong> Get quick answers for everyday calculations.</p>
-    </article>
-    <article class="tool-info-card tool-color-mint">
-      <div class="tool-info-top"><span class="tool-number">06</span><h3>🎬 Video Link Helper</h3></div>
-      <p><strong>Working:</strong> Recognizes supported video links, previews YouTube videos, and offers official save steps or a direct-file download option.</p>
-      <p><strong>Benefit:</strong> Quickly reach official save/download options for your own videos or content you have permission to save.</p>
-    </article>
-  </div>
-</section>
+<h2 id="toolShowcaseTitle" class="showcase-heading">Explore Our <span style="color:var(--accent)">Useful Tools</span></h2>
+<p class="showcase-subtitle">Sign up or log in to use these simple tools. Quick, easy, and designed to save you time.</p>
+<div class="tool-info-grid">
+<article class="tool-info-card tool-color-blue"><div class="tool-info-top"><span class="tool-number">01</span><h3>📝 Word & Character Counter</h3></div><p><strong>Working:</strong> Counts words and characters as you type.</p><p><strong>Benefit:</strong> Helps with homework, posts, captions, and writing limits.</p></article>
+<article class="tool-info-card tool-color-purple"><div class="tool-info-top"><span class="tool-number">02</span><h3>🔳 QR Code Generator</h3></div><p><strong>Working:</strong> Turns text or a website link into a QR code.</p><p><strong>Benefit:</strong> Share links and information quickly by scanning.</p></article>
+<article class="tool-info-card tool-color-mint"><div class="tool-info-top"><span class="tool-number">03</span><h3>🖼️ Image Compressor</h3></div><p><strong>Working:</strong> Reduces an image's file size in your browser.</p><p><strong>Benefit:</strong> Makes images easier to upload or share.</p></article>
+<article class="tool-info-card tool-color-blue"><div class="tool-info-top"><span class="tool-number">04</span><h3>🔐 Password Generator</h3></div><p><strong>Working:</strong> Creates a random password.</p><p><strong>Benefit:</strong> Helps make a unique password for your accounts.</p></article>
+<article class="tool-info-card tool-color-purple"><div class="tool-info-top"><span class="tool-number">05</span><h3>🧮 Calculator</h3></div><p><strong>Working:</strong> Calculates basic arithmetic.</p><p><strong>Benefit:</strong> Get quick answers for everyday calculations.</p></article>
+<article class="tool-info-card tool-color-mint"><div class="tool-info-top"><span class="tool-number">06</span><h3>🎬 Video Link Helper</h3></div><p><strong>Working:</strong> Recognizes common video links.</p><p><strong>Benefit:</strong> Find official viewing and save options for content you may save.</p></article>
+</div></section>
+
 <section id="accountSummary" class="card" hidden><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">Your account</h2><div id="accountEmail" class="muted"></div></div><button id="logoutButton" class="secondary" type="button">Log out</button></div><div class="plan"><div>Plan: <strong id="currentPlan">Loading…</strong></div><div>Status: <strong id="planStatus">Loading…</strong></div><div>Plan ends: <strong id="planEnd">—</strong></div><div>Free usage this month: <strong id="usageText">—</strong></div></div><p class="muted small">Free usage is tracked in this browser only; it is not secure server-side enforcement.</p><p id="accountMessage" class="status"></p></section>
+
 <section id="dashboard" class="card" hidden><h2>Plans & payment</h2><p class="muted">Paid plans are activated manually after payment verification.</p>
 <div class="grid"><div class="plan"><h3>Free</h3><div class="price">$0</div><p class="muted">Basic access • 1 hour/month</p><button id="freePlanButton" class="secondary" type="button">Use Free plan</button></div><div class="plan"><h3>Monthly</h3><div class="price">$10 <span class="muted small">/ month</span></div><button type="button" class="choose-plan" data-plan="monthly">Choose Monthly</button></div><div class="plan"><h3>Yearly</h3><div class="price">$99 <span class="muted small">/ year</span></div><button type="button" class="choose-plan" data-plan="yearly">Choose Yearly</button></div></div>
 <div class="card"><h3>Submit payment reference</h3><p class="muted small">Pay first, then submit the real transaction reference. A reference alone does not prove payment.</p><label for="paymentPlan">Plan</label><select id="paymentPlan"><option value="monthly">Monthly — $10</option><option value="yearly">Yearly — $99</option></select><label for="paymentMethod">Payment method</label><select id="paymentMethod"><option>USDT TRC20</option><option>Meezan Bank</option></select>
 <div class="plan"><h4>USDT TRC20</h4><p><strong>Wallet:</strong> <span id="usdtWallet">TF6SrMWKTNoDR41Y2hhEACHDKWuFBFau34</span></p><button id="copyWalletButton" class="secondary" type="button">Copy wallet address</button><p class="muted small">Check network and address carefully before sending. Crypto transfers are generally irreversible.</p></div>
 <div class="plan"><h4>Meezan Bank</h4><p><strong>Account title:</strong> MUHAMMAD FAISAL</p><p><strong>Account number:</strong> 00300116324508</p><p><strong>IBAN:</strong> PK56MEZN0000300116324508</p><p><strong>Branch:</strong> MEEZAN DIGITAL CENTRE</p></div>
-<form id="paymentForm"><label for="transactionReference">Transaction reference / ID</label><input id="transactionReference" maxlength="180" required placeholder="Enter real transaction reference"><button id="submitPaymentButton">Submit payment request</button></form><p id="paymentMessage" class="status" role="status"></p>
-</div>
-<div class="card"><h3>My payment requests</h3><button id="refreshMyPayments" class="secondary" type="button">Refresh my requests</button><div id="myPayments"><p class="muted">Log in to view requests.</p></div></div>
-</section>
-<section id="adminPanel" class="card" hidden><h2>🔐 ToolNest Admin Dashboard</h2><p class="muted">Verify the actual bank/wallet payment before approving.</p><button id="refreshPayments" class="secondary" type="button">Refresh payments</button><p id="adminMessage" class="status" role="status"></p><div id="pendingPayments"></div></section>
-<div id="toolsSection" hidden><h2 class="sectiontitle">Free tools</h2><p class="muted">Tools run in your browser. QR generation needs the QR library to load.</p>
+<form id="paymentForm"><label for="transactionReference">Transaction reference / ID</label><input id="transactionReference" maxlength="180" required placeholder="Enter real transaction reference"><button id="submitPaymentButton">Submit payment request</button></form><p id="paymentMessage" class="status" role="status"></p></div>
+<div class="card"><h3>My payment requests</h3><button id="refreshMyPayments" class="secondary" type="button">Refresh my requests</button><div id="myPayments"><p class="muted">Log in to view requests.</p></div></div></section>
+
+<section id="adminPanel" class="card" hidden><h2>🔐 ToolNest Admin Dashboard</h2><p class="muted">Verify the actual payment before approving.</p><button id="refreshPayments" class="secondary" type="button">Refresh payments</button><p id="adminMessage" class="status" role="status"></p><div id="pendingPayments"></div></section>
+
+<div id="toolsSection" hidden>
+<h2 class="sectiontitle">Free tools</h2><p class="muted">Sign in to use these tools. Most calculations happen in your browser.</p>
 <section class="tools">
 <div class="card"><h3>📝 Word & character counter</h3><label for="wordText">Enter text</label><textarea id="wordText" placeholder="Start typing…"></textarea><div id="wordResult" class="result">Words: 0 · Characters: 0 · No spaces: 0</div></div>
 <div class="card"><h3>🔳 QR code generator</h3><label for="qrText">Text or URL</label><input id="qrText" placeholder="https://example.com"><button id="makeQrButton" type="button">Generate QR</button><div id="qrResult" class="result">QR code will appear here.</div></div>
-<div class="card"><h3>🖼️ Image compressor</h3><p class="muted small">Compression happens in your browser; the image is not uploaded by this tool.</p><label for="imageInput">Choose image</label><input id="imageInput" type="file" accept="image/*"><label for="imageQuality">JPEG quality</label><input id="imageQuality" type="range" min="30" max="95" value="75"><button id="compressImageButton" type="button">Compress image</button><div id="imageResult" class="result">Choose an image to begin.</div></div>
+<div class="card"><h3>🖼️ Image compressor</h3><p class="muted small">Image processing happens in your browser.</p><label for="imageInput">Choose image</label><input id="imageInput" type="file" accept="image/*"><label for="imageQuality">JPEG quality</label><input id="imageQuality" type="range" min="30" max="95" value="75"><button id="compressImageButton" type="button">Compress image</button><div id="imageResult" class="result">Choose an image to begin.</div></div>
 <div class="card"><h3>🔐 Password generator</h3><label for="passwordLength">Length (8–64)</label><input id="passwordLength" type="number" min="8" max="64" value="16"><div class="check"><input id="includeNumbers" type="checkbox" checked><label for="includeNumbers">Include numbers</label></div><div class="check"><input id="includeSymbols" type="checkbox" checked><label for="includeSymbols">Include symbols</label></div><button id="generatePasswordButton" type="button">Generate password</button><div id="passwordResult" class="result">Generated password appears here.</div><button id="copyPasswordButton" class="secondary" type="button">Copy password</button></div>
-<div class="card"><h3>🧮 Calculator</h3><label for="calcDisplay">Expression</label><input id="calcDisplay" inputmode="decimal" placeholder="Example: (12 + 8) * 3"><button id="calculateButton" type="button">Calculate</button><div id="calcResult" class="result">Result appears here.</div><p class="muted small">Supports basic arithmetic, brackets, and decimals.</p></div>
-<div class="card"><h3>🎬 Video Link Helper</h3><p class="muted small">Paste a link to identify the platform. This tool can download direct video-file links when the server allows it; social-platform links open the original app/site and show the official save steps.</p><label for="videoUrlInput">Paste video link</label><input id="videoUrlInput" type="url" inputmode="url" placeholder="Paste YouTube, TikTok, Instagram or direct MP4 link" autocomplete="url"><button id="checkVideoLinkButton" type="button">Check link / Show options</button><div id="videoLinkResult" class="result" role="status" aria-live="polite">Paste a link above. Options and instructions will appear here.</div></div>
-</section></div>
+<div class="card"><h3>🧮 Calculator</h3><label for="calcDisplay">Expression</label><input id="calcDisplay" inputmode="decimal" placeholder="Example: (12 + 8) * 3"><button id="calculateButton" type="button">Calculate</button><div id="calcResult" class="result">Result appears here.</div></div>
+<div class="card"><h3>🎬 Video Link Helper</h3><p class="muted small">Identifies a video link and provides official viewing/save guidance.</p><label for="videoUrlInput">Paste video link</label><input id="videoUrlInput" type="url" placeholder="Paste video URL"><button id="checkVideoLinkButton" type="button">Check link</button><div id="videoLinkResult" class="result" role="status">Paste a link above.</div></div>
+</section>
+
+<h2 class="sectiontitle">₿ Crypto Real Tools — 10 Tools</h2><p class="muted">Har tool ka number, naam aur faida. Cards open karke calculator use karo.</p>
+<section class="crypto-grid">
+<article class="crypto-card"><span class="tool-number">01</span><h3>💹 Crypto Profit Calculator</h3><p class="benefit">Buy/sell price aur quantity se estimated profit ya loss nikalo.</p><div class="crypto-fields"><div><label>Buy price ($)</label><input id="cpBuy" type="number" min="0" value="100"></div><div><label>Sell price ($)</label><input id="cpSell" type="number" min="0" value="120"></div><div><label>Quantity</label><input id="cpQty" type="number" min="0" step="any" value="1"></div><div><label>Total fees ($)</label><input id="cpFees" type="number" min="0" step="any" value="0"></div></div><button type="button" onclick="cryptoProfit()">Calculate</button><div id="cpOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">02</span><h3>🔄 Crypto Converter</h3><p class="benefit">Apni entered price ke mutabiq coin ki USD value nikalo.</p><div class="crypto-fields"><div><label>Coin amount</label><input id="ccAmount" type="number" min="0" step="any" value="0.5"></div><div><label>Coin price ($)</label><input id="ccPrice" type="number" min="0" step="any" value="50000"></div></div><button type="button" onclick="cryptoConvert()">Convert</button><div id="ccOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">03</span><h3>₿ Bitcoin Price Tracker</h3><p class="benefit">Public market API se latest available BTC/USD price lene ki koshish karta hai.</p><button type="button" id="btcRefresh">Refresh BTC price</button><div id="btcOut" class="result">Refresh dabao. Internet zaroori hai.</div></article>
+
+<article class="crypto-card"><span class="tool-number">04</span><h3>📊 Crypto Portfolio Tracker</h3><p class="benefit">Apni holdings ki estimated total value calculate karo.</p><div id="portfolioRows"><div class="crypto-fields pRow"><div><label>Coin name</label><input placeholder="BTC" value="BTC"></div><div><label>Quantity</label><input type="number" min="0" step="any" value="0.01"></div><div><label>Price per coin ($)</label><input type="number" min="0" step="any" value="50000"></div></div></div><button type="button" class="secondary" onclick="addPortfolioRow()">+ Add coin</button><button type="button" onclick="portfolioCalc()">Calculate total</button><div id="portfolioOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">05</span><h3>🗓️ DCA Calculator</h3><p class="benefit">Repeated buys ka total spent aur average coin cost nikalo.</p><div id="dcaRows"><div class="crypto-fields dRow"><div><label>Purchase amount ($)</label><input type="number" min="0" step="any" value="100"></div><div><label>Price per coin ($)</label><input type="number" min="0.00000001" step="any" value="50000"></div></div><div class="crypto-fields dRow"><div><label>Purchase amount ($)</label><input type="number" min="0" step="any" value="100"></div><div><label>Price per coin ($)</label><input type="number" min="0.00000001" step="any" value="40000"></div></div></div><button type="button" class="secondary" onclick="addDcaRow()">+ Add purchase</button><button type="button" onclick="dcaCalc()">Calculate average</button><div id="dcaOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">06</span><h3>🧾 Trading Fee Calculator</h3><p class="benefit">Trade amount aur fee rate se estimated fees calculate karo.</p><div class="crypto-fields"><div><label>Trade value ($)</label><input id="feeValue" type="number" min="0" step="any" value="1000"></div><div><label>Fee rate (%)</label><input id="feeRate" type="number" min="0" step="any" value="0.1"></div><div><label>Charged sides</label><select id="feeSides"><option value="1">One side</option><option value="2" selected>Buy + sell</option></select></div></div><button type="button" onclick="feeCalc()">Calculate fees</button><div id="feeOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">07</span><h3>🏦 Market Cap Calculator</h3><p class="benefit">Price × circulating supply se market capitalization estimate karo.</p><div class="crypto-fields"><div><label>Coin price ($)</label><input id="capPrice" type="number" min="0" step="any" value="2.5"></div><div><label>Circulating supply</label><input id="capSupply" type="number" min="0" step="any" value="1000000"></div></div><button type="button" onclick="capCalc()">Calculate market cap</button><div id="capOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">08</span><h3>⚠️ Liquidation Price Estimator</h3><p class="benefit">Simplified futures estimate. Actual exchange price different ho sakti hai.</p><div class="crypto-fields"><div><label>Direction</label><select id="liqSide"><option value="long">Long</option><option value="short">Short</option></select></div><div><label>Entry price ($)</label><input id="liqEntry" type="number" min="0.00000001" step="any" value="50000"></div><div><label>Leverage (x)</label><input id="liqLev" type="number" min="1" step="any" value="10"></div><div><label>Maintenance margin (%)</label><input id="liqMM" type="number" min="0" max="99" step="any" value="0.5"></div></div><button type="button" onclick="liqCalc()">Estimate price</button><div id="liqOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">09</span><h3>🛡️ Crypto Risk Calculator</h3><p class="benefit">Account risk aur stop-loss distance se estimated position size nikalo.</p><div class="crypto-fields"><div><label>Account balance ($)</label><input id="riskBal" type="number" min="0" step="any" value="1000"></div><div><label>Risk (%)</label><input id="riskPct" type="number" min="0" max="100" step="any" value="1"></div><div><label>Entry price ($)</label><input id="riskEntry" type="number" min="0.00000001" step="any" value="50"></div><div><label>Stop-loss price ($)</label><input id="riskStop" type="number" min="0" step="any" value="48"></div></div><button type="button" onclick="riskCalc()">Calculate size</button><div id="riskOut" class="result">Result yahan aayega.</div></article>
+
+<article class="crypto-card"><span class="tool-number">10</span><h3>🪙 Satoshi Converter</h3><p class="benefit">BTC ko satoshis mein ya satoshis ko BTC mein convert karo.</p><div class="crypto-fields"><div><label>Convert from</label><select id="satMode" onchange="satCalc()"><option value="btc">BTC → Satoshi</option><option value="sat">Satoshi → BTC</option></select></div><div><label>Amount</label><input id="satAmount" type="number" min="0" step="any" value="0.001" oninput="satCalc()"></div></div><button type="button" onclick="satCalc()">Convert</button><div id="satOut" class="result">1 BTC = 100,000,000 satoshis.</div></article>
+</section>
+<p class="muted small">Crypto calculators are estimates for education, not financial advice. Prices entered manually may be stale. Never share wallet seed phrases or private keys.</p>
+</div>
 </main>
 <footer><div>© <span id="year"></span> ToolNest.</div><div class="small">Never put a Supabase service-role key or other secret in this HTML file.</div></footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
@@ -115,7 +113,7 @@ $("signupForm").addEventListener("submit",async e=>{e.preventDefault();$("signup
 $("loginForm").addEventListener("submit",async e=>{e.preventDefault();$("loginButton").disabled=true;msg("loginMessage","Logging in…");try{const{data,error}=await db.auth.signInWithPassword({email:$("loginEmail").value.trim(),password:$("loginPassword").value});if(error)throw error;msg("loginMessage","Login successful.","success");await setSession(data.session)}catch(x){msg("loginMessage",errText(x),"error")}finally{$("loginButton").disabled=false}});
 $("resetPasswordButton").addEventListener("click",async()=>{const email=$("loginEmail").value.trim();if(!email)return msg("loginMessage","Pehle login box mein email likhein.","warning");try{const{error}=await db.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(error)throw error;msg("loginMessage","Password reset link email kar diya gaya hai.","success")}catch(x){msg("loginMessage",errText(x),"error")}});
 $("logoutButton").addEventListener("click",async()=>{const{error}=await db.auth.signOut();if(error)msg("accountMessage",errText(error),"error");else await setSession(null)});
-async function loadPlan(){if(!currentUser)return;const{data,error}=await db.from("user_plans").select("user_id,plan,status,period_start,period_end").eq("user_id",currentUser.id).maybeSingle();if(error){planRecord=null;$("currentPlan").textContent="Could not load";$("planStatus").textContent="Check setup";$("planEnd").textContent="—";msg("accountMessage","Plan load error: "+error.message,"error");usageText();return}planRecord=data||null;if(!data){$("currentPlan").textContent="FREE (default)";$("planStatus").textContent="No plan row found";$("planEnd").textContent="—";msg("accountMessage","Is account ka user_plans record nahi mila. Supabase trigger ya row check karein.","warning")}else{$("currentPlan").textContent=(data.plan||"free").toUpperCase();$("planStatus").textContent=data.status||"unknown";$("planEnd").textContent=data.period_end?new Date(data.period_end).toLocaleString():"—"}usageText()}
+async function loadPlan(){if(!currentUser)return;const{data,error}=await db.from("user_plans").select("user_id,plan,status,period_start,period_end").eq("user_id",currentUser.id).maybeSingle();if(error){planRecord=null;$("currentPlan").textContent="Could not load";$("planStatus").textContent="Check setup";$("planEnd").textContent="—";usageText();return}planRecord=data||null;if(!data){$("currentPlan").textContent="FREE (default)";$("planStatus").textContent="No plan row found";$("planEnd").textContent="—";msg("accountMessage","Is account ka user_plans record nahi mila. Supabase trigger ya row check karein.","warning")}else{$("currentPlan").textContent=(data.plan||"free").toUpperCase();$("planStatus").textContent=data.status||"unknown";$("planEnd").textContent=data.period_end?new Date(data.period_end).toLocaleString():"—"}usageText()}
 function activePaid(){return !!(planRecord&&planRecord.status==="active"&&["monthly","yearly"].includes(planRecord.plan)&&(!planRecord.period_end||new Date(planRecord.period_end).getTime()>=Date.now()))}
 function usageKey(){const d=new Date();return"toolnest_usage_"+currentUser.id+"_"+d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")}
 function used(){try{return Number(localStorage.getItem(usageKey())||0)}catch(e){return 0}}
@@ -130,60 +128,29 @@ $("refreshMyPayments").addEventListener("click",loadMyPayments);
 async function checkAdmin(){$("adminPanel").hidden=true;if(!currentUser)return;try{const{data,error}=await db.from("toolnest_admins").select("user_id").eq("user_id",currentUser.id).maybeSingle();if(error)throw error;if(data){$("adminPanel").hidden=false;await loadPending()}}catch(e){console.error("Admin check failed",e)}}
 async function loadPendingIfAdmin(){if(currentUser&&!$("adminPanel").hidden)await loadPending()}
 async function loadPending(){if(!currentUser||$("adminPanel").hidden)return;const c=$("pendingPayments");c.replaceChildren();msg("adminMessage","Loading pending payments…");const{data,error}=await db.from("payment_requests").select("id,user_id,plan,amount_usd,payment_method,transaction_reference,status,created_at").eq("status","pending").order("created_at",{ascending:false});if(error){msg("adminMessage","Could not load payments: "+error.message,"error");return}if(!data?.length){msg("adminMessage","No pending payment requests.","success");return}msg("adminMessage","Pending requests: "+data.length,"success");data.forEach(p=>{const card=document.createElement("article");card.className="plan";const h=document.createElement("h3");h.textContent=p.plan.toUpperCase()+" — $"+p.amount_usd;const d=document.createElement("p");d.className="muted small";d.textContent="User ID: "+p.user_id+" | Method: "+p.payment_method+" | Reference: "+p.transaction_reference+" | "+new Date(p.created_at).toLocaleString();const row=document.createElement("div");row.className="row";const a=document.createElement("button");a.textContent="Approve";const r=document.createElement("button");r.textContent="Reject";r.className="danger";a.addEventListener("click",()=>processPayment(p.id,"approve",a,r));r.addEventListener("click",()=>processPayment(p.id,"reject",a,r));row.append(a,r);card.append(h,d,row);c.append(card)})}
-async function processPayment(id,action,a,r){const question=action==="approve"?"Actual payment bank/wallet mein verify kar li? Sirf tab approve karein.":"Is payment request ko reject karna hai?";if(!confirm(question))return;a.disabled=r.disabled=true;msg("adminMessage","Processing…");try{const{data,error}=await db.rpc(action==="approve"?"approve_toolnest_payment":"reject_toolnest_payment",{p_payment_id:id});if(error)throw error;msg("adminMessage",typeof data==="string"?data:"Payment request updated.","success");await loadPending();await loadMyPayments();await loadPlan()}catch(x){msg("adminMessage","Could not "+action+": "+errText(x),"error");a.disabled=r.disabled=false}}
+async function processPayment(id,action,a,r){if(!confirm(action==="approve"?"Actual payment verify kar li? Sirf tab approve karein.":"Request reject karni hai?"))return;a.disabled=r.disabled=true;msg("adminMessage","Processing…");try{const{data,error}=await db.rpc(action==="approve"?"approve_toolnest_payment":"reject_toolnest_payment",{p_payment_id:id});if(error)throw error;msg("adminMessage",typeof data==="string"?data:"Payment request updated.","success");await loadPending();await loadMyPayments();await loadPlan()}catch(x){msg("adminMessage","Could not "+action+": "+errText(x),"error");a.disabled=r.disabled=false}}
 $("refreshPayments").addEventListener("click",loadPending);
 $("wordText").addEventListener("input",()=>{const s=$("wordText").value,t=s.trim();$("wordResult").textContent="Words: "+(t?t.split(/\s+/).length:0)+" · Characters: "+s.length+" · No spaces: "+s.replace(/\s/g,"").length});
 $("makeQrButton").addEventListener("click",()=>{const s=$("qrText").value.trim(),c=$("qrResult");c.replaceChildren();if(!s){c.textContent="Pehle text ya URL enter karein.";return}if(typeof QRCode==="undefined"){c.textContent="QR library load nahi hui. Internet check karein.";return}const box=document.createElement("div");box.style.cssText="display:inline-block;background:white;padding:12px";c.append(box);new QRCode(box,{text:s,width:180,height:180,correctLevel:QRCode.CorrectLevel.M})});
-$("compressImageButton").addEventListener("click",()=>{const f=$("imageInput").files[0],c=$("imageResult");c.replaceChildren();if(!f)return c.textContent="Pehle image choose karein.";if(!f.type.startsWith("image/"))return c.textContent="Image file select karein.";const reader=new FileReader();reader.onerror=()=>c.textContent="Image read nahi hui.";reader.onload=()=>{const img=new Image();img.onerror=()=>c.textContent="Image open nahi hui.";img.onload=()=>{const canvas=document.createElement("canvas");canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;canvas.getContext("2d").drawImage(img,0,0);canvas.toBlob(blob=>{if(!blob){c.textContent="Compression fail hui.";return}const url=URL.createObjectURL(blob),info=document.createElement("p");info.textContent="Original: "+(f.size/1024).toFixed(1)+" KB · Compressed: "+(blob.size/1024).toFixed(1)+" KB";const preview=document.createElement("img");preview.src=url;preview.alt="Compressed image";preview.style.cssText="max-width:100%;max-height:260px;display:block;margin:10px 0";const link=document.createElement("a");link.href=url;link.download=f.name.replace(/\.[^.]+$/,"")+"-compressed.jpg";link.className="buttonlink";link.textContent="Download compressed image";c.append(info,preview,link)},"image/jpeg",Number($("imageQuality").value)/100)};img.src=reader.result};reader.readAsDataURL(f)});
-$("generatePasswordButton").addEventListener("click",()=>{const n=Math.max(8,Math.min(64,Number($("passwordLength").value)||16));$("passwordLength").value=n;let chars="abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";if($("includeNumbers").checked)chars+="23456789";if($("includeSymbols").checked)chars+="!@#$%^&*()-_=+[]{}?";const a=new Uint32Array(n);crypto.getRandomValues(a);$("passwordResult").textContent=Array.from(a,v=>chars[v%chars.length]).join("")});
-$("copyPasswordButton").addEventListener("click",async()=>{const v=$("passwordResult").textContent;if(!v||v.includes("appears here"))return;try{await navigator.clipboard.writeText(v);msg("accountMessage","Password copied.","success")}catch(e){msg("accountMessage","Copy nahi hua; manually select karein.","warning")}});
-$("calculateButton").addEventListener("click",()=>{const s=$("calcDisplay").value.trim();if(!s)return $("calcResult").textContent="Expression enter karein.";if(!/^[0-9+\-*/().\s]+$/.test(s))return $("calcResult").textContent="Sirf numbers, + - * / brackets aur decimals use karein.";try{const n=Function('"use strict";return ('+s+')')();if(typeof n!=="number"||!Number.isFinite(n))throw Error();$("calcResult").textContent="Result: "+n}catch(e){$("calcResult").textContent="Expression sahi nahi hai."}});
-function showVideoLinkOptions(){
- const raw=$("videoUrlInput").value.trim(),out=$("videoLinkResult");out.replaceChildren();
- if(!raw){out.textContent="Dost, pehle video ka poora link paste karo.";return}
- let u;try{u=new URL(raw)}catch(e){out.textContent="Ye URL format valid nahi. Poora link https:// se shuru karke paste karo.";return}
- if(!["http:","https:"].includes(u.protocol)){out.textContent="Sirf http/https links supported hain.";return}
- const host=u.hostname.toLowerCase().replace(/^www\./,"");
- const isYT=host==="youtube.com"||host==="youtu.be"||host.endsWith(".youtube.com");
- const isTT=host==="tiktok.com"||host.endsWith(".tiktok.com");
- const isIG=host==="instagram.com"||host.endsWith(".instagram.com");
- const p=document.createElement("p");p.className="muted small";
- const open=document.createElement("a");open.href=u.href;open.target="_blank";open.rel="noopener noreferrer";open.className="buttonlink";open.textContent="Open original video";
- if(isYT){
-   let id="";
-   if(host==="youtu.be") id=u.pathname.split("/").filter(Boolean)[0]||"";
-   else if(u.pathname==="/watch") id=u.searchParams.get("v")||"";
-   else {const m=u.pathname.match(/^\/(?:shorts|embed|live)\/([^/?]+)/);if(m)id=m[1]}
-   if(id && /^[\w-]{6,20}$/.test(id)){
-     p.textContent="YouTube link pehchan liya! Neeche preview aur official options hain. Is preview se video file automatically download nahi hoti.";
-     const frame=document.createElement("iframe");frame.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id);frame.title="YouTube video preview";frame.loading="lazy";frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";frame.allowFullscreen=true;frame.style.cssText="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;margin:10px 0";
-     const steps=document.createElement("p");steps.className="muted small";steps.textContent="Download: apni uploaded video ke liye YouTube Studio → Content → menu → Download. Doosri videos ke liye YouTube ka official Download option agar available ho to use karo.";
-     out.append(p,frame,open,steps);return;
-   }
-   p.textContent="YouTube domain mil gaya, lekin video ID read nahi hui. Poora watch/share link paste karo.";out.append(p,open);return;
- }
- if(isTT||isIG){
-   const platform=isTT?"TikTok":"Instagram";
-   p.textContent=platform+" link pehchan liya! Social-platform URL ko direct MP4 mein badalne ke liye platform ki permission aur supported download service chahiye. Is tool mein restrictions bypass nahi hotin.";
-   const steps=document.createElement("p");steps.className="muted small";
-   steps.textContent=isTT?"TikTok: original video kholo → Share → Save video, agar creator ne option allow kiya ho.":"Instagram: Reel kholo → Share/Options mein Download dekho, agar available ho.";
-   out.append(p,open,steps);return;
- }
- if(/\.(mp4|webm|mov|m4v)$/i.test(u.pathname)){
-   p.textContent="Direct video-file URL lag raha hai. Download try karo; success server ki permissions aur browser par depend karega.";
-   const a=document.createElement("a");a.href=u.href;a.download="video";a.target="_blank";a.rel="noopener noreferrer";a.className="buttonlink";a.textContent="Try download video";
-   out.append(p,a);return;
- }
- p.textContent="Link valid hai, lekin supported social-video URL ya direct video file nahi pehchani gayi.";
- out.append(p,open);
-}
-$("checkVideoLinkButton").addEventListener("click",showVideoLinkOptions);
-$("videoUrlInput").addEventListener("input",()=>{
- const v=$("videoUrlInput").value.trim();
- if(!v){$("videoLinkResult").textContent="Paste a link above. Options and instructions will appear here.";return}
- if(/^https?:\/\/\S+/i.test(v)) showVideoLinkOptions();
- else $("videoLinkResult").textContent="Link type ho raha hai… poora https:// link paste karo.";
-});
+$("compressImageButton").addEventListener("click",()=>{const f=$("imageInput").files[0],c=$("imageResult");c.replaceChildren();if(!f)return c.textContent="Pehle image choose karein.";const reader=new FileReader();reader.onerror=()=>c.textContent="Image read nahi hui.";reader.onload=()=>{const img=new Image();img.onload=()=>{const canvas=document.createElement("canvas");canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;canvas.getContext("2d").drawImage(img,0,0);canvas.toBlob(blob=>{if(!blob)return c.textContent="Compression fail hui.";const url=URL.createObjectURL(blob),info=document.createElement("p");info.textContent="Original: "+(f.size/1024).toFixed(1)+" KB · Compressed: "+(blob.size/1024).toFixed(1)+" KB";const a=document.createElement("a");a.href=url;a.download="compressed-image.jpg";a.className="buttonlink";a.textContent="Download compressed image";c.append(info,a)},"image/jpeg",Number($("imageQuality").value)/100)};img.onerror=()=>c.textContent="Image open nahi hui.";img.src=reader.result};reader.readAsDataURL(f)});
+$("generatePasswordButton").addEventListener("click",()=>{const n=Math.max(8,Math.min(64,Number($("passwordLength").value)||16));let chars="abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";if($("includeNumbers").checked)chars+="23456789";if($("includeSymbols").checked)chars+="!@#$%^&*()-_=+[]{}?";const a=new Uint32Array(n);crypto.getRandomValues(a);$("passwordResult").textContent=Array.from(a,v=>chars[v%chars.length]).join("")});
+$("copyPasswordButton").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("passwordResult").textContent)}catch(e){msg("accountMessage","Password manually select karke copy karein.","warning")}});
+$("calculateButton").addEventListener("click",()=>{const s=$("calcDisplay").value.trim();if(!s)return $("calcResult").textContent="Expression enter karein.";if(!/^[0-9+\-*/().\s]+$/.test(s))return $("calcResult").textContent="Sirf numbers aur basic operators use karein.";try{const n=Function('"use strict";return ('+s+')')();$("calcResult").textContent=Number.isFinite(n)?"Result: "+n:"Expression sahi nahi hai."}catch(e){$("calcResult").textContent="Expression sahi nahi hai."}});
+$("checkVideoLinkButton").addEventListener("click",()=>{const raw=$("videoUrlInput").value.trim(),o=$("videoLinkResult");o.replaceChildren();try{const u=new URL(raw);if(!["http:","https:"].includes(u.protocol))throw Error();const p=document.createElement("p");p.textContent="Link recognized. Use the original platform's official save/download option for videos you own or have permission to save.";const a=document.createElement("a");a.href=u.href;a.target="_blank";a.rel="noopener noreferrer";a.className="buttonlink";a.textContent="Open original video";o.append(p,a)}catch(e){o.textContent="Valid full https:// video link paste karein."}});
+/* Crypto tools */
+const num=id=>Number($(id).value), money=n=>"$"+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:8}), valid=(...xs)=>xs.every(x=>Number.isFinite(x)&&x>=0);
+window.cryptoProfit=()=>{let b=num("cpBuy"),s=num("cpSell"),q=num("cpQty"),f=num("cpFees");if(!valid(b,s,q,f))return $("cpOut").textContent="Valid non-negative values enter karein.";let cost=b*q,p=(s-b)*q-f;$("cpOut").textContent=(p>=0?"Estimated profit: ":"Estimated loss: ")+money(p)+" · Return: "+(cost?(((p+f)/cost)*100).toFixed(2):"—")+"%";};
+window.cryptoConvert=()=>{let a=num("ccAmount"),p=num("ccPrice");$("ccOut").textContent=valid(a,p)?"Estimated value: "+money(a*p):"Valid non-negative values enter karein.";};
+$("btcRefresh").addEventListener("click",async()=>{const o=$("btcOut");o.textContent="Loading…";try{const r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");if(!r.ok)throw Error("Market API unavailable ("+r.status+").");const d=await r.json();if(typeof d?.bitcoin?.usd!=="number")throw Error("Price data nahi mili.");o.textContent="BTC/USD: "+money(d.bitcoin.usd)+" · Checked "+new Date().toLocaleTimeString()}catch(e){o.textContent=e.message+" Dobara try karein; API limits ho sakti hain."}});
+window.addPortfolioRow=()=>{const d=document.createElement("div");d.className="crypto-fields pRow";d.innerHTML='<div><label>Coin name</label><input placeholder="ETH"></div><div><label>Quantity</label><input type="number" min="0" step="any" value="0"></div><div><label>Price per coin ($)</label><input type="number" min="0" step="any" value="0"></div>'; $("portfolioRows").append(d)};
+window.portfolioCalc=()=>{let t=0;for(const r of document.querySelectorAll(".pRow")){const i=r.querySelectorAll("input"),q=Number(i[1].value),p=Number(i[2].value);if(!valid(q,p))return $("portfolioOut").textContent="Quantity aur price valid rakhein.";t+=q*p}$("portfolioOut").textContent="Estimated portfolio value: "+money(t)};
+window.addDcaRow=()=>{const d=document.createElement("div");d.className="crypto-fields dRow";d.innerHTML='<div><label>Purchase amount ($)</label><input type="number" min="0" step="any" value="0"></div><div><label>Price per coin ($)</label><input type="number" min="0.00000001" step="any" value="1"></div>'; $("dcaRows").append(d)};
+window.dcaCalc=()=>{let spent=0,coins=0;for(const r of document.querySelectorAll(".dRow")){const i=r.querySelectorAll("input"),a=Number(i[0].value),p=Number(i[1].value);if(!valid(a)||!Number.isFinite(p)||p<=0)return $("dcaOut").textContent="Amount non-negative aur price zero se zyada honi chahiye.";spent+=a;coins+=a/p}$("dcaOut").textContent="Total spent: "+money(spent)+" · Coins: "+coins.toFixed(8)+" · Average price: "+(coins?money(spent/coins):"—")};
+window.feeCalc=()=>{let v=num("feeValue"),r=num("feeRate"),s=num("feeSides");if(!valid(v,r))return $("feeOut").textContent="Valid non-negative values enter karein.";let f=v*r/100*s;$("feeOut").textContent="Estimated total fees: "+money(f)+" · Approx. after fees: "+money(v-f)};
+window.capCalc=()=>{let p=num("capPrice"),s=num("capSupply");$("capOut").textContent=valid(p,s)?"Estimated market cap: "+money(p*s):"Valid non-negative values enter karein."};
+window.liqCalc=()=>{let e=num("liqEntry"),l=num("liqLev"),m=num("liqMM")/100;if(e<=0||l<1||!Number.isFinite(m)||m<0||m>=1)return $("liqOut").textContent="Entry > 0, leverage ≥ 1 aur margin 0 se 99% rakhein.";let p=$("liqSide").value==="long"?e*(1-1/l+m):e*(1+1/l-m);$("liqOut").textContent="Simplified estimated liquidation: "+money(Math.max(0,p))+". Exchange ke actual formula se farq ho sakta hai."};
+window.riskCalc=()=>{let b=num("riskBal"),r=num("riskPct")/100,e=num("riskEntry"),s=num("riskStop");if(!valid(b,r,s)||r>1||e<=0||s===e)return $("riskOut").textContent="Values check karein; entry aur stop-loss different hon.";let loss=b*r,q=loss/Math.abs(e-s);$("riskOut").textContent="Planned loss at stop: "+money(loss)+" · Estimated quantity: "+q.toFixed(8)+" coins · Position value: "+money(q*e)};
+window.satCalc=()=>{let a=num("satAmount");if(!valid(a))return $("satOut").textContent="Valid non-negative amount enter karein."; $("satOut").textContent=$("satMode").value==="btc"?a+" BTC = "+(a*100000000).toLocaleString()+" satoshis":a+" satoshis = "+(a/100000000).toFixed(8)+" BTC"};
 db.auth.onAuthStateChange((_event,session)=>setTimeout(()=>setSession(session),0));
 db.auth.getSession().then(({data})=>setSession(data.session));
 })();
