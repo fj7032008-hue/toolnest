@@ -1,1 +1,81 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ToolNest — Online Tools</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2e;--panel2:#17223a;--text:#edf2ff;--muted:#aab6d3;--accent:#7c9cff;--border:#2b3856;--good:#69d7a2;--bad:#ff8d9a}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top left,#1b2a50 0,var(--bg) 42rem)}
+header{padding:18px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:#0b1020ed;z-index:5}.head,main,footer{max-width:1100px;margin:auto}.head{display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{font-size:1.4rem;font-weight:850}.brand span{color:var(--accent)}main{padding:24px 16px 42px}.hero{padding:18px 0}.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.1;margin:.2em 0}.muted{color:var(--muted)}.small{font-size:.88rem}.grid,.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--border);border-radius:16px;padding:18px;margin:16px 0;min-width:0;overflow-wrap:anywhere}.card h2,.card h3{margin-top:0}label{display:block;font-weight:650;margin:12px 0 6px}input,textarea,select{width:100%;padding:11px 12px;background:#0c1427;color:var(--text);border:1px solid var(--border);border-radius:10px;font:inherit}textarea{min-height:110px;resize:vertical}button,.buttonlink{border:0;border-radius:10px;padding:11px 15px;background:linear-gradient(120deg,#7c9cff,#9b8cff);color:#091126;font:inherit;font-weight:750;cursor:pointer;display:inline-block;text-decoration:none;margin-top:10px}button:disabled{opacity:.55;cursor:wait}.secondary{background:#293653;color:var(--text);border:1px solid #3a4b70}.danger{background:#572b3b;color:#ffe8ec;border:1px solid #804254}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.status{min-height:1.4em;overflow-wrap:anywhere}.success{color:var(--good)}.error{color:var(--bad)}.warning{color:#ffd27a}.plan,.result{background:#0c1427a8;border:1px solid var(--border);border-radius:12px;padding:14px;margin:12px 0}.price{font-size:2rem;font-weight:850}.sectiontitle{margin-top:34px}.check{display:flex;gap:8px;align-items:center}.check input{width:auto}.check label{margin:0}footer{border-top:1px solid var(--border);padding:18px 16px 32px;color:var(--muted)}[hidden]{display:none!important}
+@media(max-width:720px){.grid,.tools{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}.card{padding:15px}}
+
+/* ToolNest front-page tool showcase */
+.tool-showcase{margin:26px 0 34px;padding:22px;border:1px solid #2b3856;border-radius:20px;background:linear-gradient(135deg,#101a31,#15142b 58%,#102a2b)}
+.showcase-heading{text-align:center;margin:0 0 8px;font-size:clamp(1.45rem,3vw,2rem)}
+.showcase-subtitle{text-align:center;max-width:700px;margin:0 auto 20px;color:var(--muted)}
+.tool-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tool-info-card{position:relative;padding:17px;border-radius:15px;background:#0b1225;border:1px solid #344366;overflow:hidden}
+.tool-info-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--tool-color,#7c9cff)}
+.tool-info-top{display:flex;align-items:center;gap:11px;margin-bottom:8px}
+.tool-number{display:inline-grid;place-items:center;flex:0 0 38px;height:38px;border-radius:12px;font-weight:850;color:#081126;background:var(--tool-color,#7c9cff)}
+.tool-info-card h3{margin:0;font-size:1.05rem}
+.tool-info-card p{margin:7px 0 0;color:var(--muted);font-size:.93rem}
+.tool-info-card strong{color:var(--text)}
+.tool-color-blue{--tool-color:#7c9cff}
+.tool-color-purple{--tool-color:#c09aff}
+.tool-color-mint{--tool-color:#69d7a2}
+.folder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}.folder-button{text-align:left;width:100%;padding:20px;border:1px solid #344366;border-radius:16px;background:linear-gradient(135deg,#182644,#102b2c);color:var(--text);margin:0}.folder-button strong{display:block;font-size:1.1rem}.folder-button span{display:block;color:var(--muted);font-weight:400;font-size:.9rem;margin-top:5px}.crypto-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.crypto-card{background:linear-gradient(155deg,#17233d,#10172a);border:1px solid #33476b;border-radius:14px;padding:16px;min-width:0}.crypto-card h3{margin:0 0 8px}.crypto-card input,.crypto-card select{margin-bottom:7px}.crypto-card .result{overflow-wrap:anywhere}@media(max-width:720px){.folder-grid,.crypto-tools-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.tool-showcase{padding:16px}.tool-info-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<header><div class="head"><div class="brand">Tool<span>Nest</span></div><div class="muted">Useful online tools in one place</div></div></header>
+<main>
+<section class="hero"><p class="muted">ALL-IN-ONE ONLINE TOOLS</p><h1>Useful tools, <span style="color:var(--accent)">all in one nest.</span></h1><p class="muted">Create an account, choose a plan, and use simple browser-based tools.</p></section>
+<section id="authSection" class="grid">
+<div class="card"><h2>Create account</h2><p class="muted small">Use an email address you can access.</p><form id="signupForm"><label for="signupEmail">Email</label><input id="signupEmail" type="email" autocomplete="email" required><label for="signupPassword">Password</label><input id="signupPassword" type="password" minlength="6" autocomplete="new-password" required><button id="signupButton">Sign up</button></form><p id="signupMessage" class="status" role="status"></p></div>
+<div class="card"><h2>Log in</h2><form id="loginForm"><label for="loginEmail">Email</label><input id="loginEmail" type="email" autocomplete="email" required><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required><button id="loginButton">Log in</button><button id="resetPasswordButton" class="secondary" type="button">Forgot password?</button></form><p id="loginMessage" class="status" role="status"></p></div>
+</section>
+
+const w=window.open("","_blank");if(!w){$("invoiceResult").textContent="Browser ne popup block kiya. Site ke liye popups allow karke dobara try karo.";return}
+ w.document.open();w.document.write(doc);w.document.close();$("invoiceResult").textContent=`Invoice ready: ${qty} × ${rate.toFixed(2)} = ${total.toFixed(2)}. Print dialog se Save as PDF choose kar sakte ho.`;
+});
+
+db.auth.onAuthStateChange((_event,session)=>setTimeout(()=>setSession(session),0));
+db.auth.getSession().then(({data})=>setSession(data.session));
+})();
+
+// Folder navigation
+function showToolFolder(folder){$('generalToolsPanel').hidden=folder!=='general';$('cryptoToolsPanel').hidden=folder!=='crypto';document.querySelector('.folder-grid').hidden=folder!=='folders';}
+$('openGeneralFolder').addEventListener('click',()=>showToolFolder('general'));$('openCryptoFolder').addEventListener('click',()=>showToolFolder('crypto'));$('backFromGeneral').addEventListener('click',()=>showToolFolder('folders'));$('backFromCrypto').addEventListener('click',()=>showToolFolder('folders'));
+function cxNum(id){return Number($(id).value)}function cxFmt(n){return Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:8}):'Check your inputs';}function cxOut(id,t){$(id).textContent=t;}
+document.querySelectorAll('[data-cx]').forEach(b=>b.addEventListener('click',async()=>{const a=b.dataset.cx;try{switch(a){
+case'price':{const coin=$('cxCoin').value.trim().toLowerCase();if(!/^[a-z0-9-]+$/.test(coin))throw Error('Coin ID mein sirf letters, numbers aur hyphen use karein.');cxOut('cxPriceOut','Loading public price…');const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+encodeURIComponent(coin)+'&vs_currencies=usd,pk');if(!r.ok)throw Error('Price API abhi unavailable hai. Thori der baad try karein.');const d=await r.json();if(!d[coin])throw Error('Coin ID nahi mila. CoinGecko ka coin ID use karein.');cxOut('cxPriceOut','USD: $'+cxFmt(d[coin].usd)+' · PKR: '+(d[coin].pkr!=null?'Rs '+cxFmt(d[coin].pkr):'Not provided')+' · Data may be delayed.');break}
+case'pnl':{let v=(cxNum('cxSell')-cxNum('cxBuy'))*cxNum('cxQty');cxOut('cxPnlOut','Profit / loss: '+cxFmt(v)+' · Change: '+(cxNum('cxBuy')?cxFmt((cxNum('cxSell')/cxNum('cxBuy')-1)*100)+'%':'N/A'));break}
+case'avg':{let q=cxNum('cxA1q')+cxNum('cxA2q');cxOut('cxAvgOut',q?'Weighted average: '+cxFmt((cxNum('cxA1p')*cxNum('cxA1q')+cxNum('cxA2p')*cxNum('cxA2q'))/q):'Quantity total must be above zero.');break}
+case'dca':cxOut('cxDcaOut','Total contributions: '+cxFmt(cxNum('cxDcaAmount')*cxNum('cxDcaCount')));break;
+case'pct':cxOut('cxPctOut',cxNum('cxPctFrom')?'Change: '+cxFmt((cxNum('cxPctTo')/cxNum('cxPctFrom')-1)*100)+'%':'Starting value cannot be zero.');break;
+case'mc':cxOut('cxMcOut','Market cap: '+cxFmt(cxNum('cxMcPrice')*cxNum('cxMcSupply')));break;
+case'implied':cxOut('cxImpliedOut',cxNum('cxTargetSupply')?'Implied price: '+cxFmt(cxNum('cxTargetMc')/cxNum('cxTargetSupply')):'Supply must be above zero.');break;
+case'stake':cxOut('cxStakeOut','Estimated reward: '+cxFmt(cxNum('cxStake')*cxNum('cxStakeRate')/100*cxNum('cxStakeDays')/365)+' · Total: '+cxFmt(cxNum('cxStake')*(1+cxNum('cxStakeRate')/100*cxNum('cxStakeDays')/365)));break;
+case'apy':{let n=Math.max(1,cxNum('cxApyN'));let rate=cxNum('cxApy')/100;if(rate<0)throw Error('Rate negative nahi ho sakta.');cxOut('cxApyOut','Equivalent APR: '+cxFmt(n*((1+rate)**(1/n)-1)*100)+'%');break}
+case'apr':{let n=Math.max(1,cxNum('cxAprN'));let rate=cxNum('cxApr')/100;if(rate<0)throw Error('Rate negative nahi ho sakta.');cxOut('cxAprOut','Estimated APY: '+cxFmt(((1+rate/n)**n-1)*100)+'%');break}
+case'compound':{let v=cxNum('cxCompStart')*(1+cxNum('cxCompRate')/100)**cxNum('cxCompYears');cxOut('cxCompoundOut','Hypothetical ending amount: '+cxFmt(v));break}
+case'position':cxOut('cxPositionOut','Net P/L: '+cxFmt((cxNum('cxPosExit')-cxNum('cxPosEntry'))*cxNum('cxPosUnits')-cxNum('cxPosFees')));break;
+case'rr':{let risk=Math.abs(cxNum('cxRRentry')-cxNum('cxRRstop')),reward=Math.abs(cxNum('cxRRtarget')-cxNum('cxRRentry'));cxOut('cxRROut',risk?'Reward:risk = '+cxFmt(reward/risk)+':1':'Entry and stop cannot be equal.');break}
+case'liq':{let e=cxNum('cxLiqEntry'),l=cxNum('cxLiqLev');if(e<=0||l<=0)throw Error('Entry aur leverage positive hon.');cxOut('cxLiqOut','Very rough '+$('cxLiqSide').value+' level: '+cxFmt(e*( $('cxLiqSide').value==='long'?1-1/l:1+1/l))+' (real exchanges differ materially).');break}
+case'gas':{let f=cxNum('cxGasFactor');cxOut('cxGasOut',f?'Estimated fee: '+cxFmt(cxNum('cxGasUsed')*cxNum('cxGasRate')/f)+' in the chosen unit':'Conversion factor must be above zero.');break}
+case'fee':cxOut('cxFeeOut','Fee per transaction: '+cxFmt(cxNum('cxFeeValue')*cxNum('cxFeeRate')/100)+' · Total: '+cxFmt(cxNum('cxFeeValue')*cxNum('cxFeeRate')/100*cxNum('cxFeeCount')));break;
+case'saveasset':{let arr=JSON.parse(localStorage.getItem('toolnest_crypto_assets')||'[]');arr.push({asset:$('cxAsset').value.trim().toUpperCase(),quantity:cxNum('cxAssetQty'),price:cxNum('cxAssetPrice'),value:cxNum('cxAssetQty')*cxNum('cxAssetPrice')});localStorage.setItem('toolnest_crypto_assets',JSON.stringify(arr));cxOut('cxAssetsOut','Saved on this device only. Estimated total: '+cxFmt(arr.reduce((s,x)=>s+x.value,0)));break}
+case'showassets':{let arr=JSON.parse(localStorage.getItem('toolnest_crypto_assets')||'[]');cxOut('cxAssetsOut',arr.length?arr.map(x=>x.asset+' · Qty '+cxFmt(x.quantity)+' · Value '+cxFmt(x.value)).join('\n')+'\nTotal: '+cxFmt(arr.reduce((s,x)=>s+x.value,0)):'No saved assets on this device.');break}
+case'clearassets':localStorage.removeItem('toolnest_crypto_assets');cxOut('cxAssetsOut','Local portfolio cleared.');break;
+case'vesting':{let total=cxNum('cxVestTotal'),cliff=cxNum('cxVestCliff'),dur=Math.max(1,cxNum('cxVestDuration')),elapsed=cxNum('cxVestElapsed');let vested=elapsed<cliff?0:total*Math.min(1,elapsed/dur);cxOut('cxVestingOut','Estimated vested: '+cxFmt(vested)+' tokens · Remaining: '+cxFmt(total-vested));break}
+case'tax':{let profit=cxNum('cxTaxProfit'),rate=Math.min(100,Math.max(0,cxNum('cxTaxRate')));cxOut('cxTaxOut','Estimated amount: '+cxFmt(Math.max(0,profit)*rate/100)+' · after estimate: '+cxFmt(profit-Math.max(0,profit)*rate/100)+'. Rules vary; ask a qualified tax professional.');break}
+case'wallet':{let v=$('cxWallet').value.trim(),chain=$('cxChain').value,ok=false,desc='Unrecognized/uncertain format';if(chain==='evm'||(chain==='auto'&&v.startsWith('0x'))) {ok=/^0x[a-fA-F0-9]{40}$/.test(v);desc='EVM address format'}else if(chain==='btc'||(chain==='auto'&&/^(bc1|[13])/.test(v))){ok=/^(bc1)[a-zA-HJ-NP-Z0-9]{11,71}$/.test(v)||/^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/.test(v);desc='Bitcoin address format'}else if(chain==='sol'||chain==='auto'){ok=/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(v);desc='Base58-style address format'}cxOut('cxWalletOut',(ok?'Looks like a possible ':'Does not match a basic ')+desc+'. This does not verify ownership, funds, or network.');break}
+}}catch(e){const map={price:'cxPriceOut',pnl:'cxPnlOut',avg:'cxAvgOut',dca:'cxDcaOut',pct:'cxPctOut',mc:'cxMcOut',implied:'cxImpliedOut',stake:'cxStakeOut',apy:'cxApyOut',apr:'cxAprOut',compound:'cxCompoundOut',position:'cxPositionOut',rr:'cxRROut',liq:'cxLiqOut',gas:'cxGasOut',fee:'cxFeeOut',saveasset:'cxAssetsOut',showassets:'cxAssetsOut',clearassets:'cxAssetsOut',vesting:'cxVestingOut',tax:'cxTaxOut',wallet:'cxWalletOut'};cxOut(map[a]||'cxPriceOut',e.message||'Could not calculate. Check inputs.')}}));
+
+</script>
+</body>
+</html>
